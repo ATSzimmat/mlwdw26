@@ -1,6 +1,6 @@
 #' Convert .doc-files containing evidence material to .txt-format
 #'
-#' This function converts .doc files to .txt using LibreOffice.
+#' This function converts .doc files to .txt using the program LibreOffice.
 #'
 #' @param doc_folder Path to a certain folder containing .doc documents.
 #' @export
