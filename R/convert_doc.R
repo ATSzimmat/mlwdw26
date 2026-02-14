@@ -1,6 +1,8 @@
 #' Convert .doc-files containing evidence material to .txt-format
 #'
-#' This function converts .doc files to .txt files using the LibreOffice program. Note: This function requires that LibreOffice is installed in a folder named "Applications" and that you are currently using a Mac.
+#' This function converts .doc files to .txt files using the LibreOffice program.
+#'
+#' Note: This function requires that LibreOffice is installed in a folder named "Applications" and that you are currently using a Mac.
 #'
 #' @param doc_folder Path to a certain folder containing .doc documents.
 #' @export
