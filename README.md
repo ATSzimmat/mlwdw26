@@ -1,7 +1,7 @@
 
-# mlwdw26
-
 <img src="images/clipboard-3294737435.png" width="208" />
+
+# mlwdw26
 
 Welcome to the package R historical2 - a new tool that wants to
 facilitate work with primary sources of history in R!
