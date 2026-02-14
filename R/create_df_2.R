@@ -174,6 +174,16 @@ create_df_2 <- function(txt_folder) {
     pattern = "\\.txt$",
     full.names = TRUE)
   # Hilfsfunktion II_vectorize_txt auf alle aufgelisteten txt-Dateien anwenden
+  df_list <- df_list[!sapply(df_list, is.null)]
+
+  if (length(df_list) == 0) {
+    return(data.frame(
+      langer_beleg = character(),
+      pruef_beleg = character(),
+      pruef_stelle = character(),
+      stringsAsFactors = FALSE
+    ))
+  }
   df_list <- lapply(files, function(f) {
     text_vec <- II_vectorize_txt(f)
     # Falls Datei keinen verwertbaren Text enthält, überspringen
