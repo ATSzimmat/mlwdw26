@@ -1,4 +1,4 @@
-#' Convert .doc-files from the evidence material to txt format
+#' Convert .doc-files containing evidence material to .txt-format
 #'
 #' This function converts .doc files to .txt using LibreOffice.
 #'
