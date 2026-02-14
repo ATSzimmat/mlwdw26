@@ -13,7 +13,7 @@ create_df_2(txt_folder)
 An evidence dataset containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle" and that is ready for use with merge_df
 }
 \description{
-This function creates a DataFrame from all .txt-files located in the specified folder, containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle". The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package and executed convert_doc on the doc_folder.
+This function creates a DataFrame from all .txt-files located in the specified folder, containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle". The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package and executed convert_doc on the doc_folder. Please execute the example code manually and don't use the run_examples button.
 }
 \examples{
 # Create the evidence dataFrame
