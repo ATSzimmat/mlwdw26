@@ -1,3 +1,4 @@
+#' @export
 create_df_2 <- function(txt_folder) {
   # Hilfsfunktion zum Vektorisieren der txt Dateien
   II_vectorize_txt <- function(pfad) {

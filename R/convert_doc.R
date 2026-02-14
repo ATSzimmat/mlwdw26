@@ -1,3 +1,4 @@
+#' @export
 convert_doc <- function(doc_folder) {
   # Pfad zum LibreOffice-Program definieren
   soffice <- "/Applications/LibreOffice.app/Contents/MacOS/soffice"

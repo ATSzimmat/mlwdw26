@@ -1,3 +1,4 @@
+#' @export
 merge_df <- function(lem_dat, bel_dat) {
   lem_dat <- lem_dat %>%
     # Suchmuster definieren
