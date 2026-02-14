@@ -3,34 +3,11 @@
 
 # mlwdw26
 
-Welcome to the package R historical2 - a new tool that wants to
-facilitate work with primary sources of history in R!
-
-To obtain information about the past, it is essential to examine the
-evidence that has survived the testimonies of time and is still
-available to us today. These evidences can appear in many forms – as
-inscriptions on stones, as ancient ruins, or as texts that report on the
-time, sometimes even as contemporary witnesses. These evidences (or
-primary sources) are simply referred to as “sources” in historical
-science, and any “history books” written about these sources are called
-“(research) literature”. If historians want to answer a research
-question, they first have the task of collecting the sources relevant to
-their research and then evaluating them scientifically, taking into
-account the existing literature. Afterwards, they usually want to
-compile the sources into an organized text with the correct citations (a
-so-called source paper) in order to present their sources. However, the
-process of finding the sources, managing them, and ultimately creating
-the source paper can easily become very tedious and time-consuming. The
-author of this package is currently majoring in history and minoring in
-statistics and data science at the LMU of Munich and has faced this
-challenge several times himself.
+Welcome to the R package mlwdw26 – a new tool developed to organize the
+data generated in the context of the creation of the Medieval Latin
+Dictionary (MLW) to date!
 
 ## Installation
 
-You can install the development version of mlwdw26 from
+You can install the current version of mlwdw26 from
 [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("pak")
-pak::pak("ATSzimmat/mlwdw26")
-```
