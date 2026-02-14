@@ -16,6 +16,7 @@ A new folder was created containing the converted files. The name of this folder
 This function converts .doc-files to .txt files using the LibreOffice program. The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy". Note: This function requires LibreOffice to be located in a folder named "Applications" and that you are currently using a Mac.
 }
 \examples{
-# Convert the .doc-files from a example folder with .doc-files from the toy folder
+\dontrun{# Convert the .doc-files from a example folder with .doc-files from the toy folder
 convert_doc("toy/toy_doc")
+}
 }
