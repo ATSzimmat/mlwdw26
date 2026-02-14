@@ -1,20 +1,19 @@
 #' DOC-Dateien in TXT umwandeln via LibreOffice
 #'
-#' Diese Funktion konvertiert alle .doc Dateien eines Ordners in .txt Dateien
-#' und bereinigt den Text.
-#'
-#' @param doc_folder Pfad zum Ordner mit den .doc Dateien.
+#' @param doc_folder Pfad zum Ordner
 #' @export
 convert_doc <- function(doc_folder) {
   soffice <- "/Applications/LibreOffice.app/Contents/MacOS/soffice"
+  # HIER: stringr:: hinzugefügt
   output_dir <- paste0(stringr::str_remove(doc_folder, "/$"), "_txt")
   if (!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
-  doc_files <- list.files(doc_folder, pattern = "\.doc$", full.names = TRUE, ignore.case = TRUE)
+  doc_files <- list.files(doc_folder, pattern = "\\.doc$", full.names = TRUE, ignore.case = TRUE)
   for (doc_path in doc_files) {
     system2(soffice, args = c("--headless", "--convert-to", "txt:Text", "--outdir", output_dir, shQuote(doc_path)))
     generated_txt <- file.path(output_dir, paste0(tools::file_path_sans_ext(basename(doc_path)), ".txt"))
     if (!file.exists(generated_txt)) next
     zeilen <- readLines(generated_txt, warn = FALSE, encoding = "UTF-8")
+    # HIER: stringr:: hinzugefügt
     clean_zeilen <- stringr::str_trim(zeilen)
     final_text <- ifelse(nchar(clean_zeilen) > 0, paste0(" ", clean_zeilen, " "), "")
     writeLines(final_text, generated_txt, useBytes = TRUE)
