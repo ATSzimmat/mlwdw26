@@ -1,4 +1,17 @@
+#' Create an evidence dataset from the txt files that is ready for use with merge_df
+#'
+#' This function creates a DataFrame from all txt files located in the specified folder, containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle". The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package.
+#'
+#' @param doc_folder Path to a certain folder containing .txt-files.
+#' @returns An evidence dataset containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle" and that is ready for use with merge_df
 #' @export
+#' @examples
+#' # Create the evidence dataFrame
+#' toy_belege <- create_df_2("toy/toy_doc_txt")
+#' # View the result
+#' View(toy_belege)
+#'
+#'
 create_df_2 <- function(txt_folder) {
 
   # Hilfsfunktion zum Vektorisieren der txt Dateien
