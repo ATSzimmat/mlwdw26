@@ -7,7 +7,7 @@
 create_df_2(txt_folder)
 }
 \arguments{
-\item{doc_folder}{Path to a certain folder containing .txt-files.}
+\item{txt_folder}{Path to a certain folder containing .txt-files.}
 }
 \value{
 An evidence dataset containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle" and that is ready for use with merge_df
