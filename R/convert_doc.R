@@ -1,6 +1,6 @@
 #' Convert .doc-files containing evidence material to .txt-format
 #'
-#' This function converts .doc-files to .txt files using the LibreOffice program. The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy" after you installed the package. Note: This function requires LibreOffice to be located in a folder named "Applications" and that you are currently using a Mac. This is also the reason why the examples contain the comment "## Do not execute" - do not be confused by this - it merely serves to prevent R from causing errors.
+#' This function converts .doc-files to .txt files using the LibreOffice program. The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package. Note: This function requires LibreOffice to be located in a folder named "Applications" and that you are currently using a Mac. This is also the reason why the examples contain the comment "## Not run" - do not be confused by this - it merely serves to prevent R from causing errors.
 #'
 #' @param doc_folder Path to a certain folder containing .doc-files.
 #' @returns A new folder was created containing the converted files. The name of this folder is the same as the folder containing the .doc-files, with "_txt" appended to the end.
