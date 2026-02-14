@@ -1,3 +1,7 @@
+#' Create an article dataset from the .mlw-files that is ready for use with merge_df
+#'
+#' This function creates a DataFrame from all .mlw-files located in the specified folder, containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle". The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package and executed convert_doc on the doc_folder. Please execute the example code manually and don't use the run_examples button.
+#'
 #' @export
 create_df <- function(mlw_folder) {
   # Alle mlw-Datei im Ordner auflisten
@@ -12,28 +16,28 @@ create_df <- function(mlw_folder) {
     # Lemmazeile bereinigen
     mlw <- mlw[mlw != ""]
     mlw <- sapply(mlw, function(line) {
-      if (str_detect(line, "^LEMMA")) {
+      if (stringr::str_detect(line, "^LEMMA")) {
         line <- gsub("[\\*0-9\\.]", "", line)
         line <- gsub("\\([^\\)]*\\)", "", line)
         line <- gsub("\\{[^\\}]*\\}", "", line)
-        line <- str_trim(line)
+        line <- stringr::str_trim(line)
       }
       return(line)
     }, USE.NAMES = FALSE)
     # ZITAT-Feldnamen hinzufügen und Zeilen ohne Feldnamen an die obere Zeile mit Feldnamen anhängen
     mlw <- gsub("\\s+", " ", mlw)
-    mlw <- str_trim(mlw, side = "left")
+    mlw <- stringr::str_trim(mlw, side = "left")
     result <- c()
     buffer <- NULL
     for (line in mlw) {
       # ZITAT erkennen
-      if (str_detect(line, "^\\* [A-Z]+")) {
+      if (stringr::str_detect(line, "^\\* [A-Z]+")) {
         line <- sub("^\\* ", "ZITAT ", line)
         if (!is.null(buffer)) result <- c(result, buffer)
         buffer <- line
         next
       }
-      if (str_detect(line, "^[A-Z]+")) {
+      if (stringr::str_detect(line, "^[A-Z]+")) {
         if (!is.null(buffer)) result <- c(result, buffer)
         buffer <- line
         next
@@ -204,74 +208,74 @@ create_df <- function(mlw_folder) {
   toy_lemmata <- final_df
   # Sicherstellen, dass jedes Zitat in einem eigenen Eintrag steht
   toy_lemmata <- toy_lemmata %>%
-    rowwise() %>%
-    mutate(zitat_split = list(str_extract_all(zitat, '[^"]*"[^"]*"')[[1]])) %>%
-    ungroup() %>%
-    unnest(zitat_split) %>%
-    mutate(zitat = zitat_split) %>%
-    select(-zitat_split)
+    dplyr::rowwise() %>%
+    dplyr::mutate(zitat_split = list(stringr::str_extract_all(zitat, '[^"]*"[^"]*"')[[1]])) %>%
+    dplyr::ungroup() %>%
+    tidyr::unnest(zitat_split) %>%
+    dplyr::mutate(zitat = zitat_split) %>%
+    dplyr::select(-zitat_split)
   # Überflüssige Leerzeichen entfernen
   toy_lemmata$zitat <- trimws(toy_lemmata$zitat)
   # Hilfsfunktion - Stellenangabe als Autor, Werk, Stelle aufteilen
   split_zitat_final4 <- function(df, zitat_col = "zitat") {
     df <- df %>%
-      rowwise() %>%
-      mutate(
-        zitat_text = str_extract(get(zitat_col), '"(.*)"') %>% str_remove_all('"'),
-        metadaten = str_remove(get(zitat_col), '"(.*)"') %>% str_trim(),
+      dplyr::rowwise() %>%
+      dplyr::mutate(
+        zitat_text = stringr::str_extract(get(zitat_col), '"(.*)"') %>% stringr::str_remove_all('"'),
+        metadaten = stringr::str_remove(get(zitat_col), '"(.*)"') %>% stringr::str_trim(),
         autor = {
-          words <- str_split(metadaten, "\\s+")[[1]]
+          words <- stringr::str_split(metadaten, "\\s+")[[1]]
           autor_words <- c()
           for(w in words) {
-            if(str_detect(w, "^[A-Z]+$")) {
+            if(stringr::str_detect(w, "^[A-Z]+$")) {
               autor_words <- c(autor_words, w)
             } else break
           }
           paste(autor_words, collapse = " ")
         },
-        rest_nach_autor = if(autor == "") metadaten else str_replace(metadaten, paste0("^", fixed(autor)), "") %>% str_trim(),
-        werk = { w_match <- str_extract(rest_nach_autor, "^[^0-9]+"); if(!is.na(w_match)) str_trim(w_match) else "" },
-        zahlen = { z_match <- str_extract(rest_nach_autor, "\\d.*$"); if(!is.na(z_match)) str_trim(z_match) else "" }
+        rest_nach_autor = if(autor == "") metadaten else stringr::str_replace(metadaten, paste0("^", fixed(autor)), "") %>% stringr::str_trim(),
+        werk = { w_match <- stringr::str_extract(rest_nach_autor, "^[^0-9]+"); if(!is.na(w_match)) stringr::str_trim(w_match) else "" },
+        zahlen = { z_match <- stringr::str_extract(rest_nach_autor, "\\d.*$"); if(!is.na(z_match)) stringr::str_trim(z_match) else "" }
       ) %>%
-      ungroup() %>%
-      mutate(zitat = zitat_text) %>%
-      select(-zitat_text, -metadaten, -rest_nach_autor)
+      dplyr::ungroup() %>%
+      dplyr::mutate(zitat = zitat_text) %>%
+      dplyr::select(-zitat_text, -metadaten, -rest_nach_autor)
     return(df)
   }
   # Hilfsfunktion anwenden
   toy_lemmata <- split_zitat_final4(toy_lemmata)
   # Stellenangaben bereinigen
   toy_lemmata <- toy_lemmata %>%
-    mutate(across(c(werk, zahlen), ~ str_replace_all(., "\\bp\\b", ""))) %>%
-    mutate(across(c(autor, werk, zahlen), ~ str_squish(.))) %>%
-    mutate(across(c(autor, werk, zahlen), ~ ifelse(. == "", NA, .))) %>%
+    dplyr::mutate(dplyr::across(c(werk, zahlen), ~ stringr::str_replace_all(., "\\bp\\b", ""))) %>%
+    dplyr::mutate(dplyr::across(c(autor, werk, zahlen), ~ stringr::str_squish(.))) %>%
+    dplyr::mutate(dplyr::across(c(autor, werk, zahlen), ~ ifelse(. == "", NA, .))) %>%
     # Fehlende Autornamen, die durch das Aufteilen der Zitate entstanden sind, mit dem darüberliegenden Namen auffüllen
-    fill(autor, .direction = "down") %>%
-    fill(werk, .direction = "down") %>%
-    select(-zahlen) %>%
-    unite("autor_werk", autor, werk, sep = " ", remove = TRUE, na.rm = TRUE) %>%
-    relocate(zitat, .after = last_col()) %>%
-    rename(stelle = autor_werk)
+    tidyr::fill(autor, .direction = "down") %>%
+    tidyr::fill(werk, .direction = "down") %>%
+    dplyr::select(-zahlen) %>%
+    tidyr::unite("autor_werk", autor, werk, sep = " ", remove = TRUE, na.rm = TRUE) %>%
+    dplyr::relocate(zitat, .after = dplyr::last_col()) %>%
+    dplyr::rename(stelle = autor_werk)
   # Stellenangabe kuerzen
   toy_lemmata <- toy_lemmata %>%
-    mutate(pruef_stelle_zitat = stelle %>% str_replace_all("[^A-Za-z ]", "") %>% str_squish() %>% str_extract("^\\S+(?:\\s+\\S+){0,2}")) %>%
-    select(-stelle) %>%
-    rename(stelle = pruef_stelle_zitat)
+    dplyr::mutate(pruef_stelle_zitat = stelle %>% stringr::str_replace_all("[^A-Za-z ]", "") %>% stringr::str_squish() %>% stringr::str_extract("^\\S+(?:\\s+\\S+){0,2}")) %>%
+    dplyr::select(-stelle) %>%
+    dplyr::rename(stelle = pruef_stelle_zitat)
   # Lemma-Angabe-Bereinigung
   toy_lemmata$lemma <- trimws(toy_lemmata$lemma)
   toy_lemmata$lemma <- sub("\\s.*", "", toy_lemmata$lemma)
   toy_lemmata$lemma <- sub("\\s", "", toy_lemmata$lemma)
   # Textbereinigung der Zitate
-  toy_lemmata <- toy_lemmata %>% rename(text = zitat)
-  toy_lemmata <- toy_lemmata %>% mutate(
-    text = str_replace_all(text, "[^A-Za-z ]", ""),
-    text = str_replace_all(text, "\\b\\w{1,3}\\b", ""),
-    text = str_squish(text),
+  toy_lemmata <- toy_lemmata %>% dplyr::rename(text = zitat)
+  toy_lemmata <- toy_lemmata %>% dplyr::mutate(
+    text = stringr::str_replace_all(text, "[^A-Za-z ]", ""),
+    text = stringr::str_replace_all(text, "\\b\\w{1,3}\\b", ""),
+    text = stringr::str_squish(text),
     text = tolower(text),
-    text = str_replace_all(text, "NA", ""),
-    text = str_replace_all(text, "v", "u")
+    text = stringr::str_replace_all(text, "NA", ""),
+    text = stringr::str_replace_all(text, "v", "u")
   ) %>%
-    rename(zitat = text)
+    dplyr::rename(zitat = text)
   # Ergebnis ausgeben
   return(toy_lemmata)
 }
