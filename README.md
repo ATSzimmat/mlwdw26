@@ -4,8 +4,9 @@
 # mlwdw26 (MLW Data Wrangling 2026)
 
 Welcome to the R package mlwdw26 – a new tool for organizing the data
-generated during the creation of the Medieval Latin Dictionary (MLW),
-which is being developed at the Bavarian Academy of Sciences (BAdW)!
+generated in the creation of the Medieval Latin Dictionary (MLW), as far
+as it has been created so far, which is being developed at the Bavarian
+Academy of Sciences (BAdW)!
 
 ## Installation
 
