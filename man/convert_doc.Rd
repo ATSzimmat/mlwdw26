@@ -2,13 +2,13 @@
 % Please edit documentation in R/convert_doc.R
 \name{convert_doc}
 \alias{convert_doc}
-\title{DOC-Dateien in TXT umwandeln via LibreOffice}
+\title{Convert the text from the evidence material to txt format}
 \usage{
 convert_doc(doc_folder)
 }
 \arguments{
-\item{doc_folder}{Pfad zum Ordner}
+\item{doc_folder}{Path to file with doc-documents}
 }
 \description{
-DOC-Dateien in TXT umwandeln via LibreOffice
+Convert the text from the evidence material to txt format
 }
