@@ -10,8 +10,5 @@ convert_doc(doc_folder)
 \item{doc_folder}{Path to a certain folder containing .doc documents.}
 }
 \description{
-This function converts .doc files to .txt files using the LibreOffice program.
-}
-\details{
-Note: This function requires that LibreOffice is installed in a folder named "Applications" and that you are currently using a Mac.
+This function converts .doc files to .txt files using the LibreOffice program. Note: This function requires that LibreOffice is installed in a folder named "Applications" and that you are currently using a Mac.
 }
