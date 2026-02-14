@@ -3,7 +3,7 @@
 #' This function converts .doc-files to .txt files using the LibreOffice program. The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy". Note: This function requires LibreOffice to be located in a folder named "Applications" and that you are currently using a Mac.
 #'
 #' @param doc_folder Path to a certain folder containing .doc-files.
-#' @returns A new folder was created containing the converted files. The name of this folder is the same as the folder containing the .doc files, with "_txt" appended to the end.
+#' @returns A new folder was created containing the converted files. The name of this folder is the same as the folder containing the .doc-files, with "_txt" appended to the end.
 #' @export
 #' @examples
 #' # Convert the .doc-files from a example folder with .doc-files from the toy folder
