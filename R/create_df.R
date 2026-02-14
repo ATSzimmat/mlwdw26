@@ -12,7 +12,7 @@ create_df <- function(mlw_folder) {
   # In lapply integierte Hilfsfunktion, die mlw-Artikel vektorisiert
   lemmata_vecs <- lapply(mlw_files, function(mlw_dat_name) {
     # Datei ins Vektorformat bringen
-    mlw <- readLines(mlw_dat_name, encoding = "UTF-8")
+    mlw <- readLines(mlw_dat_name, encoding = "UTF-8", warn = FALSE)
     # Lemmazeile bereinigen
     mlw <- mlw[mlw != ""]
     mlw <- sapply(mlw, function(line) {
