@@ -1,15 +1,10 @@
 #' @export
 create_df_2 <- function(txt_folder) {
-  # Packages laden
-  library(readr)
-  library(stringr)
-  library(dplyr)
-  library(tools)
-  library(magrittr)
+
   # Hilfsfunktion zum Vektorisieren der txt Dateien
   II_vectorize_txt <- function(pfad) {
     # txt-Dateien einlesen
-    belegtext <- read_lines(pfad)
+    belegtext <- readr::read_lines(pfad)
     text_neu <- belegtext
     # Erste Anpassungen
     # Zahlen
@@ -174,7 +169,7 @@ create_df_2 <- function(txt_folder) {
     return(text_neu)}
   # Jetzt wird die Hauptfunktion ausgeführt
   # Alle txt-Dateien im Ordner auflisten
-  files <- list.files(
+  files <- base::list.files(
     path = txt_folder,
     pattern = "\\.txt$",
     full.names = TRUE)
@@ -184,7 +179,7 @@ create_df_2 <- function(txt_folder) {
     # Falls Datei keinen verwertbaren Text enthält, überspringen
     if (length(text_vec) == 0) return(NULL)
     # Dateiennamen identifizieren und bereinigen
-    file_name <- tools::file_path_sans_ext(basename(f))
+    file_name <- tools::file_path_sans_ext(base::basename(f))
     file_name <- gsub(
       "\\s*\\(\\s*ed\\.[^)]*\\)",
       "",
@@ -205,50 +200,50 @@ create_df_2 <- function(txt_folder) {
   toy_belege$text <- trimws(toy_belege$text)
   # An Sätze, die höchstens 5 Wörter lang sind wir der nächste Satz engehangen
   toy_belege <- toy_belege %>%
-    mutate(.row_id = row_number()) %>%
-    group_by(source) %>%
-    group_modify(~{
+    dplyr::mutate(.row_id = dplyr::row_number()) %>%
+    dplyr::group_by(source) %>%
+    dplyr::group_modify(~{
       tmp <- .x
-      wc <- str_count(tmp$text, "\\S+")
+      wc <- stringr::str_count(tmp$text, "\\S+")
       for (i in seq_len(nrow(tmp) - 1)) {
         if (!is.na(wc[i]) && wc[i] <= 5) {
           tmp$text[i] <- paste(tmp$text[i], tmp$text[i + 1])
           tmp$text[i + 1] <- NA}}
       tmp
     }) %>%
-    ungroup() %>%
-    filter(!is.na(text)) %>%
-    arrange(.row_id) %>%
-    select(-.row_id)
+    dplyr::ungroup() %>%
+    dplyr::filter(!is.na(text)) %>%
+    dplyr::arrange(.row_id) %>%
+    dplyr::select(-.row_id)
   # Text vereinfachen (hierfür wird eine weitere Version des Belege-Datasets erstellt)
   # Nur Buchstaben behalten
-  toy_belege_2 <- toy_belege %>% mutate(text = str_replace_all(text, "[^A-Za-z ]", ""))
+  toy_belege_2 <- toy_belege %>% dplyr::mutate(text = stringr::str_replace_all(text, "[^A-Za-z ]", ""))
   # Zu kurze Wörter entfernen
-  toy_belege_2 <- toy_belege_2 %>%mutate(text = str_replace_all(text, "\\b\\w{1,3}\\b", ""),text = str_squish(text))
+  toy_belege_2 <- toy_belege_2 %>%dplyr::mutate(text = stringr::str_replace_all(text, "\\b\\w{1,3}\\b", ""),text = stringr::str_squish(text))
   #  Nur noch Kleinbuchstaben
-  toy_belege_2 <- toy_belege_2 %>% mutate(text = tolower(text))
+  toy_belege_2 <- toy_belege_2 %>% dplyr::mutate(text = base::tolower(text))
   # NA und überflüssige Leerzeichen entfernen
   toy_belege_2 <- toy_belege_2 %>%
-    mutate(
-      text = str_replace_all(text, "NA", ""),
-      text = str_squish(text)
+    dplyr::mutate(
+      text = stringr::str_replace_all(text, "NA", ""),
+      text = stringr::str_squish(text)
     )
   # Belegmaterial aus dem die Belege extrahiert werden
-  orig_beleg <- toy_belege %>% select(text, source)
+  orig_beleg <- toy_belege %>% dplyr::select(text, source)
   # Belegmaterial mit dem auf passende Zitate geprüft wird
-  pruefmaterial <- toy_belege_2 %>% select(text, source)
-  orig_beleg <- toy_belege %>% rename(langer_beleg=text, stelle=source) %>% select(langer_beleg)
-  pruefmaterial <- toy_belege_2 %>% rename(pruef_beleg=text, stelle=source)
+  pruefmaterial <- toy_belege_2 %>% dplyr::select(text, source)
+  orig_beleg <- toy_belege %>% dplyr::rename(langer_beleg=text, stelle=source) %>% dplyr::select(langer_beleg)
+  pruefmaterial <- toy_belege_2 %>% dplyr::rename(pruef_beleg=text, stelle=source)
   # Beide Datasets zusammenfügen
   toy_belege <- cbind(orig_beleg, pruefmaterial)
   # Alle us durch vs ersetzen (im Prüfbeleg)
-  toy_belege <- toy_belege %>% mutate(pruef_beleg = str_replace_all(pruef_beleg, "v", "u"))
+  toy_belege <- toy_belege %>% dplyr::mutate(pruef_beleg = stringr::str_replace_all(pruef_beleg, "v", "u"))
   # Stellenangabe anpassen (alle Nicht-Buchstaben entfernen und nur die ersten 3 Wörter der Stellenangabe behalten
-  toy_belege <- toy_belege %>% mutate(pruef_stelle = stelle %>%
-                                        str_replace_all("[^A-Za-z ]", "") %>%
-                                        str_squish() %>%
-                                        str_extract("^\\S+(?:\\s+\\S+){0,2}"))
-  toy_belege <- toy_belege %>% select(-stelle)
+  toy_belege <- toy_belege %>% dplyr::mutate(pruef_stelle = stelle %>%
+                                               stringr::str_replace_all("[^A-Za-z ]", "") %>%
+                                               stringr::str_squish() %>%
+                                               stringr::str_extract("^\\S+(?:\\s+\\S+){0,2}"))
+  toy_belege <- toy_belege %>% dplyr::select(-stelle)
 
   df <- toy_belege
 
