@@ -7,7 +7,7 @@
 convert_doc(doc_folder)
 }
 \arguments{
-\item{doc_folder}{Path to a certain folder containing .doc documents.}
+\item{doc_folder}{Path to a certain folder containing .doc files.}
 }
 \value{
 A new folder was created containing the converted files. The name of this folder is the same as the folder containing the .doc files, with "_txt" appended to the end.
