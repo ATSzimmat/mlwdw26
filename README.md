@@ -1,7 +1,7 @@
 
 <img src="images/clipboard-3294737435.png" width="208" />
 
-# mlwdw26
+# mlwdw26 (MLW Data Wrangling 2026)
 
 Welcome to the R package mlwdw26 – a new tool developed to organize the
 data generated in the context of the creation of the Medieval Latin
