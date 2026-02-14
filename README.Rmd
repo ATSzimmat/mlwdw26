@@ -14,7 +14,7 @@ Welcome to the R package mlwdw26 – a new tool for organizing the data generate
 
 ## Installation
 
-You can install the current version of mlwdw26 from [GitHub](https://github.com/) with:
+You can install the current version of mlwdw26 in R from [GitHub](https://github.com/) with:
 
 ```         
 

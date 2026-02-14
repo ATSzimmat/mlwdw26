@@ -14,7 +14,7 @@ is being developed at the Bavarian Academy of Sciences (BAdW) since
 
 ## Installation
 
-You can install the current version of mlwdw26 from
+You can install the current version of mlwdw26 in R from
 [GitHub](https://github.com/) with:
 
 
