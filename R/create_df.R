@@ -2,7 +2,7 @@
 #'
 #' This function creates a DataFrame from all .mlw-files located in the specified folder, containing the columns "lemma", "u*_bedeutung", "zitat" and "stelle". The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package and executed convert_doc on the doc_folder. Please execute the example code manually and don't use the run_examples button.
 #'
-#' @param txt_folder Path to a certain folder containing .mlw-files.
+#' @param mlw_folder Path to a certain folder containing .mlw-files.
 #' @returns An evidence dataset containing the columns "lemma", "u*_bedeutung", "zitat" and "stelle" and that is ready for use with merge_df
 #' @export
 #' @examples

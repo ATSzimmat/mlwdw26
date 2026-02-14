@@ -7,7 +7,7 @@
 create_df(mlw_folder)
 }
 \arguments{
-\item{txt_folder}{Path to a certain folder containing .mlw-files.}
+\item{mlw_folder}{Path to a certain folder containing .mlw-files.}
 }
 \value{
 An evidence dataset containing the columns "lemma", "u*_bedeutung", "zitat" and "stelle" and that is ready for use with merge_df
