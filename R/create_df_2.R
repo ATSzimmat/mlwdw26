@@ -10,8 +10,6 @@
 #' toy_belege <- create_df_2("toy/toy_doc_txt")
 #' # View the result
 #' View(toy_belege)
-#'
-#'
 create_df_2 <- function(txt_folder) {
 
   # Hilfsfunktion zum Vektorisieren der txt Dateien
