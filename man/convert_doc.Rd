@@ -2,7 +2,7 @@
 % Please edit documentation in R/convert_doc.R
 \name{convert_doc}
 \alias{convert_doc}
-\title{Convert .doc-files from the evidence material to txt format}
+\title{Convert .doc-files containing evidence material to .txt-format}
 \usage{
 convert_doc(doc_folder)
 }
@@ -10,5 +10,5 @@ convert_doc(doc_folder)
 \item{doc_folder}{Path to a certain folder containing .doc documents.}
 }
 \description{
-This function converts .doc files to .txt using LibreOffice.
+This function converts .doc files to .txt using the program LibreOffice.
 }
