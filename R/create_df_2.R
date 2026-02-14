@@ -1,5 +1,11 @@
 #' @export
 create_df_2 <- function(txt_folder) {
+  # Packages laden
+  library(readr)
+  library(stringr)
+  library(dplyr)
+  library(tools)
+  library(magrittr)
   # Hilfsfunktion zum Vektorisieren der txt Dateien
   II_vectorize_txt <- function(pfad) {
     # txt-Dateien einlesen
