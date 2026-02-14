@@ -1,5 +1,5 @@
 
-<img src="images/clipboard-3294737435.png" width="208" />
+<img src="images/clipboard-520238277.png" width="175" />
 
 # mlwdw26 (MLW Data Wrangling 2026)
 
