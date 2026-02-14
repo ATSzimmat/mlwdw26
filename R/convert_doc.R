@@ -2,7 +2,7 @@
 #'
 #' This function converts .doc files to .txt using LibreOffice.
 #'
-#' @param doc_folder Path to the folder containing .doc documents.
+#' @param doc_folder Path to a folder containing .doc documents.
 #' @export
 convert_doc <- function(doc_folder) {
   soffice <- "/Applications/LibreOffice.app/Contents/MacOS/soffice"

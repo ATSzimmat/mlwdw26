@@ -7,7 +7,7 @@
 convert_doc(doc_folder)
 }
 \arguments{
-\item{doc_folder}{Path to the folder containing .doc documents.}
+\item{doc_folder}{Path to a folder containing .doc documents.}
 }
 \description{
 This function converts .doc files to .txt using LibreOffice.
