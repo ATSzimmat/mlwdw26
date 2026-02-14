@@ -1,10 +1,13 @@
 #' Convert .doc-files containing evidence material to .txt-format
 #'
-#' This function converts .doc files to .txt files using the LibreOffice program. Note: This function requires LibreOffice to be located in a folder named "Applications" and that you are currently using a Mac.
+#' This function converts .doc files to .txt files using the LibreOffice program. The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy". Note: This function requires LibreOffice to be located in a folder named "Applications" and that you are currently using a Mac.
 #'
 #' @param doc_folder Path to a certain folder containing .doc documents.
 #' @returns A new folder was created containing the converted files. The name of this folder is the same as the folder containing the .doc files, with "_txt" appended to the end.
 #' @export
+#' @examples
+#' # Convert the .doc-files from a example folder with doc_files from the toy folder
+#' convert_doc("toy/toy_doc")
 convert_doc <- function(doc_folder) {
   soffice <- "/Applications/LibreOffice.app/Contents/MacOS/soffice"
   output_dir <- paste0(stringr::str_remove(doc_folder, "/$"), "_txt")
