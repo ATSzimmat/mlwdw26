@@ -20,6 +20,4 @@ This function creates a DataFrame from all txt files located in the specified fo
 toy_belege <- create_df_2("toy/toy_doc_txt")
 # View the result
 View(toy_belege)
-
-
 }
