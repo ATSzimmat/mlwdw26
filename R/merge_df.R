@@ -2,46 +2,46 @@
 merge_df <- function(lem_dat, bel_dat) {
   lem_dat <- lem_dat %>%
     # Suchmuster definieren
-    mutate(
+    dplyr::mutate(
       # Suchmuster für Bedingung B
-      stelle_clean = str_trim(stelle),
+      stelle_clean = stringr::str_trim(stelle),
       # Suchmuster für Bedingung A
-      pattern_A = map_chr(str_split(zitat, "\\s+"), ~{
+      pattern_A = purrr::map_chr(stringr::str_split(zitat, "\\s+"), ~{
         w <- .x[.x != ""]
         if(length(w) == 0) return(NA_character_)
         paste0("(?i)", paste0(w, collapse = ".*"))
       }),
       # Suchmuster für Bedingung C
-      cond_C = str_count(zitat, "\\S+") >= 4,
+      cond_C = stringr::str_count(zitat, "\\S+") >= 4,
       # Suchmuster für B_vermindert
-      stelle_v = str_split(stelle_clean, "\\s+") %>% map_chr(~.x[1])
+      stelle_v = stringr::str_split(stelle_clean, "\\s+") %>% purrr::map_chr(~.x[1])
     )
   # Suchmuster für Bedingung B und B_vermindert in den Belegdaten (Indices für Beschleunigung)
   bel_dat <- bel_dat %>%
-    mutate(
-      stelle_clean = str_trim(pruef_stelle),
-      stelle_v = str_split(stelle_clean, "\\s+") %>% map_chr(~.x[1])
+    dplyr::mutate(
+      stelle_clean = stringr::str_trim(pruef_stelle),
+      stelle_v = stringr::str_split(stelle_clean, "\\s+") %>% purrr::map_chr(~.x[1])
     )
-  index_full <- split(seq_len(nrow(bel_dat)), bel_dat$stelle_clean)
-  index_vermindert <- split(seq_len(nrow(bel_dat)), bel_dat$stelle_v)
+  index_full <- base::split(base::seq_len(base::nrow(bel_dat)), bel_dat$stelle_clean)
+  index_vermindert <- base::split(base::seq_len(base::nrow(bel_dat)), bel_dat$stelle_v)
   # Prüfregeln definieren
   # Hilfsfunktion für Prüfen Bedingung D
   check_D_internal <- function(pb, lemma) {
-    if (is.na(pb) || is.na(lemma) || nchar(lemma) < 4) return(FALSE)
-    prefix <- tolower(substr(lemma, 1, 4))
-    words <- str_split(tolower(pb), "\\s+")[[1]]
-    any(substr(words, 1, 4) == prefix)
+    if (base::is.na(pb) || base::is.na(lemma) || base::nchar(lemma) < 4) return(FALSE)
+    prefix <- base::tolower(base::substr(lemma, 1, 4))
+    words <- stringr::str_split(base::tolower(pb), "\\s+")[[1]]
+    base::any(base::substr(words, 1, 4) == prefix)
   }
   # Hilfsfunktion für uneindeutige Zitate
   evaluate_internal <- function(indices, curr_lemma, b_dat) {
     # Wenn nur doppelt, kein Problem
     if (length(indices) == 0) return(NULL)
-    indices <- unique(indices)
+    indices <- base::unique(indices)
     # Wenn tatsächlich uneindeutig, dann Bedingung D prüfen
     if (length(indices) == 1) return(indices[1])
     texts <- b_dat$langer_beleg[indices]
-    if (length(unique(na.omit(texts))) == 1) return(indices[1])
-    d_flags <- map_lgl(indices, ~check_D_internal(b_dat$pruef_beleg[.x], curr_lemma))
+    if (length(base::unique(stats::na.omit(texts))) == 1) return(indices[1])
+    d_flags <- purrr::map_lgl(indices, ~check_D_internal(b_dat$pruef_beleg[.x], curr_lemma))
     d_indices <- indices[d_flags]
     # Wenn immer noch uneindeutig, dann gibt es mehrere Kandidaten-Belege
     if (length(d_indices) == 1) return(d_indices[1])
@@ -49,11 +49,11 @@ merge_df <- function(lem_dat, bel_dat) {
   }
   # Mit einer for-Schleife die einzelnen Bedingungen prüfen
   # Objekte definieren
-  results <- rep(NA_character_, nrow(lem_dat))
+  results <- base::rep(NA_character_, base::nrow(lem_dat))
   liste_fehler <- list()
   liste_mehrdeutig <- list()
   # Beginn der for-Schleife
-  for (i in seq_len(nrow(lem_dat))) {
+  for (i in base::seq_len(base::nrow(lem_dat))) {
     # Statusse definieren
     status_A <- FALSE; status_B <- FALSE; status_D <- FALSE
     res <- NULL
@@ -70,38 +70,38 @@ merge_df <- function(lem_dat, bel_dat) {
     # Prüfung auf A,B,C
     # Prüfung auf B
     cands_f <- index_full[[curr_sz]]
-    if (!is.null(cands_f)) {
+    if (!base::is.null(cands_f)) {
       # Prüfung auf A
-      match_A_vec <- str_detect(bel_dat$pruef_beleg[cands_f], p_A)
-      status_A <- any(match_A_vec, na.rm = TRUE)
-      w_sz <- str_split(curr_sz, "\\s+")[[1]]
-      match_B_vec <- map_lgl(cands_f, ~{
-        w_s <- str_split(bel_dat$stelle_clean[.x], "\\s+")[[1]]
-        length(w_sz) >= 3 && length(w_s) >= 3 && all(w_sz[1:3] == w_s[1:3])
+      match_A_vec <- stringr::str_detect(bel_dat$pruef_beleg[cands_f], p_A)
+      status_A <- base::any(match_A_vec, na.rm = TRUE)
+      w_sz <- stringr::str_split(curr_sz, "\\s+")[[1]]
+      match_B_vec <- purrr::map_lgl(cands_f, ~{
+        w_s <- stringr::str_split(bel_dat$stelle_clean[.x], "\\s+")[[1]]
+        length(w_sz) >= 3 && length(w_s) >= 3 && base::all(w_sz[1:3] == w_s[1:3])
       })
-      status_B <- any(match_B_vec, na.rm = TRUE)
+      status_B <- base::any(match_B_vec, na.rm = TRUE)
       # Wenn alle drei Bedingungen erfüllt sind, neue Zeile definieren
-      curr_cands <- cands_f[which(match_A_vec & match_B_vec & status_C)]
+      curr_cands <- cands_f[base::which(match_A_vec & match_B_vec & status_C)]
       # Auf Uneindeutigkeit überprüfen
       res <- evaluate_internal(curr_cands, curr_lemma, bel_dat)
     }
     # Prüfung auf A, B_vermindert und C
-    if (is.null(res)) {
+    if (base::is.null(res)) {
       # Prüfung auf B_vermindert
       cands_v <- index_vermindert[[curr_sz_v]]
       # Prüfung auf A
-      if (!is.null(cands_v)) {
-        match_A_v <- str_detect(bel_dat$pruef_beleg[cands_v], p_A)
+      if (!base::is.null(cands_v)) {
+        match_A_v <- stringr::str_detect(bel_dat$pruef_beleg[cands_v], p_A)
         # Prüfung auf C
-        curr_cands <- cands_v[which(match_A_v & status_C)]
+        curr_cands <- cands_v[base::which(match_A_v & status_C)]
         res <- evaluate_internal(curr_cands, curr_lemma, bel_dat)
       }
     }
     # Bei eindeutigen Ergebnis, Treffer speichern
-    if (is.numeric(res) && length(res) == 1) {
+    if (base::is.numeric(res) && length(res) == 1) {
       results[i] <- bel_dat$langer_beleg[res]
     }
-    else if (is.numeric(res) && length(res) > 1) {
+    else if (base::is.numeric(res) && length(res) > 1) {
       # Bei mehreren Ergebnissen, alle Kandidaten in einer Liste speichern
       for (idx in res) {
         tmp_mehr <- lem_dat[i, , drop = FALSE]
@@ -115,9 +115,9 @@ merge_df <- function(lem_dat, bel_dat) {
       # tag-Liste der Statusmeldungen definieren
       tags <- c("A" = status_A, "B" = status_B, "C" = status_C, "D" = status_D)
       # Erfüllte Statusse bekommen eine Spalte
-      tmp_err$erfuellt <- paste(names(tags)[tags], collapse = ", ")
+      tmp_err$erfuellt <- base::paste(names(tags)[tags], collapse = ", ")
       # Nicht-erfüllte Statusse bekommen eine Spalte
-      tmp_err$nicht_erfuellt <- paste(names(tags)[!tags], collapse = ", ")
+      tmp_err$nicht_erfuellt <- base::paste(names(tags)[!tags], collapse = ", ")
       # Liste der Fehler definieren
       liste_fehler[[length(liste_fehler) + 1]] <- tmp_err
     }
@@ -128,16 +128,16 @@ merge_df <- function(lem_dat, bel_dat) {
   clean_cols <- c("stelle_clean", "pattern_A", "cond_C", "stelle_v")
   # Dataset mit Fehlern als CSV-Datei speichern
   if (length(liste_fehler) > 0) {
-    write_csv(bind_rows(liste_fehler) %>% select(-any_of(clean_cols)), "fehler.csv")
+    readr::write_csv(dplyr::bind_rows(liste_fehler) %>% dplyr::select(-tidyselect::any_of(clean_cols)), "fehler.csv")
   }
   # Dataset mit uneindeutig zugeordneten Zitaten als CSV-Datei speichern
   if (length(liste_mehrdeutig) > 0) {
-    write_csv(bind_rows(liste_mehrdeutig) %>% select(-any_of(clean_cols)), "nicht_eindeutig.csv")
+    readr::write_csv(dplyr::bind_rows(liste_mehrdeutig) %>% dplyr::select(-tidyselect::any_of(clean_cols)), "nicht_eindeutig.csv")
   }
   # Treffer in Dataset speichern
   final_df <- lem_dat %>%
-    filter(!is.na(langes_zitat)) %>%
-    select(-any_of(clean_cols))
+    dplyr::filter(!is.na(langes_zitat)) %>%
+    dplyr::select(-tidyselect::any_of(clean_cols))
   # Ergebnis erhalten
   return(final_df)
 }
