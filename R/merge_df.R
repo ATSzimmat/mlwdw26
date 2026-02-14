@@ -1,4 +1,20 @@
+#' Extend the citations in the article dataset using the passages from the evidence material.
+#'
+#' This function takes an article dataset created by create_df and an evidence dataset created by create_df_2 and gives back an article dataset with extended citations. All citations from the article dataset for which no suitable partner could be found are stored separately in a CSV-file, including metadata, and the sources of error are explicitly stated.
+#'
+#' @param lem_dat an article dataset created by create_df
+#' @param bel_dat an evidence dataset created by create_df_2
+#' @returns an article dataset with extended citations
 #' @export
+#' @examples
+#' # Extend the Citations of the article dataset
+#' final_df <- merge_df(lem_dat = toy_artikel , bel_dat = toy_belege)
+#' # View the new article dataset
+#' View(final_df)
+#' # View the citations with no suitable partner
+#' errors <- readr::read_csv("fehler.csv")
+#' View(errors)
+#'
 merge_df <- function(lem_dat, bel_dat) {
   lem_dat <- lem_dat %>%
     # Suchmuster definieren
