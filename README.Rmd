@@ -47,7 +47,9 @@ convert_doc(doc_folder = "toy/toy_doc")
 
 #### Decription
 
-This function creates a DataFrame from all .txt-files located in the specified folder, containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle". The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package and executed convert_doc on the doc_folder.
+This function creates a Dataset from all .txt-files located in the specified folder, containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle". The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package and executed convert_doc on the doc_folder. The lines of the .txt files are split according to sentences (ending with . ! or ?), and lines split by entries are merged (words split by hyphenation are rejoined). Entries in () and sentences consisting of only one word (one or more letters) are excluded from this process - the latter is intended, among other things, to handle abbreviations. Consecutive word strings in all caps are given their own line. Beforehand, some cleanup operations are performed that could interfere with the line splitting process. Edition references in () are removed from the text file names (e.g., (ed. N. Bubnov, Gerberti opera math. 1899. p. 203,7)). In the event that a sentence ends with an abbreviation and thus part of the sentence would be cut off, the next sentence is appended to sentences that are at most 5 words long. Since there is between the supporting texts and quotations contain an irregular use of the letters u and v, all v's are replaced by u. All non-letters are removed from the reference, and only the first 3 words of the reference are retained.
+
+Afterwards the function creates two new columns from the text column (long_document and test_document), where the test_document column reduces words longer than 3 letters and spaces, and converts all uppercase letters to lowercase
 
 #### Output
 
