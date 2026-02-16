@@ -360,4 +360,5 @@ being an evidence dataset created by create_df_2
     errors <- readr::read_csv("fehler.csv")
     View(errors)
     # View the quotes with several possible partners
-    #' Ambiguous <- readr::read_csv("nicht_eindeutig.csv")
+    ambiguous <- readr::read_csv("nicht_eindeutig.csv")
+    # View(ambiguous)

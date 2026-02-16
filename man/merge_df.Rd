@@ -26,6 +26,7 @@ View(final_df)
 errors <- readr::read_csv("fehler.csv")
 View(errors)
 # View the quotes with several possible partners
-Ambiguous <- readr::read_csv("nicht_eindeutig.csv")
+ambiguous <- readr::read_csv("nicht_eindeutig.csv")
+# View(ambiguous)
 
 }
