@@ -24,6 +24,8 @@ This function converts .doc-files to .txt files using the LibreOffice program. T
 convert_doc(doc_folder)
 ```
 
+with doc_folder being a path to a certain folder containing .doc-files.
+
 #### Value
 
 A new folder was created containing the converted files. The name of this folder is the same as the folder containing the .doc-files, with "\_txt" appended to the end.

@@ -27,6 +27,8 @@ are currently using a Mac.
 
     convert_doc(doc_folder)
 
+with doc_folder being a path to a certain folder containing .doc-files.
+
 #### Value
 
 A new folder was created containing the converted files. The name of
