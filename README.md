@@ -8,9 +8,7 @@ generated in the creation of the Medieval Latin Dictionary (MLW), which
 is being developed at the Bavarian Academy of Sciences (BAdW) since
 1939!
 
-## Motivation
-
-## Functions
+# Functions
 
 ## *convert_doc*
 
