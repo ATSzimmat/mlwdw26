@@ -15,7 +15,7 @@ merge_df(lem_dat, bel_dat)
 an article dataset with extended citations
 }
 \description{
-This function takes an article dataset created by create_df and an evidence dataset created by create_df_2 and gives back an article dataset with extended citations. All citations from the article dataset for which no suitable partner could be found are stored separately in a CSV-file, including metadata, and the sources of error are explicitly stated.The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package and executed convert_doc, create_df and create_df_2. For further informations see https://github.com/ATSzimmat/mlwdw26.
+This function takes an article dataset created by create_df and an evidence dataset created by create_df_2 and gives back an article dataset with extended citations. All citations from the article dataset for which no suitable partner could be found are stored separately in a CSV-file, including metadata, and the sources of error are explicitly stated.The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package and executed convert_doc, create_df and create_df_2. For further informations see https://github.com/ATSzimmat/mlwdw26. All citations for which the function found no matching partner are saved in a CSV file, always named "fehler.csv". The source of the error that led to the missing partner is explicitly indicated. All citations for which the function found multiple possible partners are saved in a CSV file, always named "nicht_eindeutig.csv".
 }
 \examples{
 # Extend the Citations of the article dataset
@@ -25,5 +25,7 @@ View(final_df)
 # View the citations with no suitable partner
 errors <- readr::read_csv("fehler.csv")
 View(errors)
+# View the quotes with several possible partners
+Ambiguous <- readr::read_csv("nicht_eindeutig.csv")
 
 }

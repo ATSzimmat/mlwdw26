@@ -23,6 +23,7 @@ You can install and use the current version of mlwdw26 after you
 executed this in R:
 
     install.packages("remotes")
+    install.packages("readr")
     remotes::install_github("ATSzimmat/mlwdw26")
     library(mlwdw26)
 
@@ -307,4 +308,56 @@ with a path to a certain folder containing the .mlw-files.
     # View the result
     View(toy_artikel)
 
-# 
+## *merge_df*
+
+### Description
+
+- This function takes an article dataset created by create_df and an
+  evidence dataset created by create_df_2 and gives back an article
+  dataset with extended citations.
+
+- All citations from the article dataset for which no suitable partner
+  could be found are stored separately in a CSV-file, including
+  metadata, and the sources of error are explicitly stated. The files
+  used in the example were automatically loaded with the package and
+  should be located in your project folder as a folder named “toy”,
+  after you installed the package and executed convert_doc, create_df
+  and create_df_2.
+
+- All citations for which the function found no matching partner are
+  saved in a CSV file, always named “fehler.csv”. The source of the
+  error that led to the missing partner is explicitly indicated.
+
+- All citations for which the function found multiple possible partners
+  are saved in a CSV file, always named “nicht_eindeutig.csv”.
+
+### Conditions for a match
+
+### Output
+
+- An article dataset with extended citations
+
+### Assumptions
+
+- The conditions under which the decision tree assumes a match
+  correspond at least approximately to those that require an actual
+  match.
+
+### Usage
+
+    merge_df(lem_dat, bel_dat)
+
+with lem_dat being an article dataset created by create_df and bel_dat
+being an evidence dataset created by create_df_2
+
+### Example
+
+    # Extend the Citations of the article dataset
+    final_df <- merge_df(lem_dat = toy_artikel , bel_dat = toy_belege)
+    # View the new article dataset
+    View(final_df)
+    # View the citations with no suitable partner
+    errors <- readr::read_csv("fehler.csv")
+    View(errors)
+    # View the quotes with several possible partners
+    #' Ambiguous <- readr::read_csv("nicht_eindeutig.csv")
