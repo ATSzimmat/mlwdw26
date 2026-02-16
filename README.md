@@ -10,7 +10,7 @@ is being developed at the Bavarian Academy of Sciences (BAdW) since
 
 ## Motivation
 
-## Functions & Workflow
+## Functions
 
 ### convert_doc
 
@@ -49,6 +49,33 @@ with doc_folder being a path to a certain folder containing .doc-files.
 
     # Convert the .doc-files from a example folder with .doc-files from the toy folder
     convert_doc(doc_folder = "toy/toy_doc")
+
+### create_df_2
+
+#### Decription
+
+This function creates a DataFrame from all .txt-files located in the
+specified folder, containing the columns “langer_beleg”, “pruef_beleg”
+and “pruef_stelle”. The files used in the example were automatically
+loaded with the package and should be located in your project folder as
+a folder named “toy”, after you installed the package and executed
+convert_doc on the doc_folder.
+
+#### Output
+
+An evidence dataset containing the columns “langer_beleg”, “pruef_beleg”
+and “pruef_stelle” and that is ready for use with merge_df
+
+#### Usage
+
+    create_df_2(txt_folder)
+
+#### Example
+
+    # Create the evidence dataFrame
+    toy_belege <- create_df_2("toy/toy_doc_txt")
+    # View the result
+    View(toy_belege)
 
 ## Installation
 
