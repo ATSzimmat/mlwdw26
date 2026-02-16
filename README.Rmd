@@ -55,6 +55,12 @@ An evidence dataset containing the columns "langer_beleg", "pruef_beleg" and "pr
 
 #### Assumptions
 
+The folder containing the .txt-files contains only .txt-files (and no other documents or folders).
+
+The editorial notes in parentheses in the .txt file names have no special meaning and can be deleted without further ado.
+
+Sentences ending with an abbreviation are no more than 5 words long.
+
 The following expressions in the source material have no special meaning and can be deleted without further ado:
 
 -   Arabic numerals (with a p.:\* or l.:*)* before them or in parentheses () or \<\> or [] or with [a-z] after them or a period

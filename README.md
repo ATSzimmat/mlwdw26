@@ -68,6 +68,14 @@ and “pruef_stelle” and that is ready for use with merge_df
 
 #### Assumptions
 
+The folder containing the .txt-files contains only .txt-files (and no
+other documents or folders).
+
+The editorial notes in parentheses in the .txt file names have no
+special meaning and can be deleted without further ado.
+
+Sentences ending with an abbreviation are no more than 5 words long.
+
 The following expressions in the source material have no special meaning
 and can be deleted without further ado:
 

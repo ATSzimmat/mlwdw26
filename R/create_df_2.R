@@ -7,7 +7,7 @@
 #' @export
 #' @examples
 #' # Create the evidence dataFrame
-#' toy_belege <- create_df_2("toy/toy_doc_txt")
+#' toy_belege <- create_df_2(txt_folder = "toy/toy_doc_txt")
 #' # View the result
 #' View(toy_belege)
 create_df_2 <- function(txt_folder) {

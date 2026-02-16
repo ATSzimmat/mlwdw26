@@ -17,6 +17,6 @@ This function converts .doc-files to .txt files using the LibreOffice program. T
 }
 \examples{
 \dontrun{# Convert the .doc-files from a example folder with .doc-files from the toy folder
-convert_doc("toy/toy_doc")
+convert_doc(doc_folder = "toy/toy_doc")
 }
 }
