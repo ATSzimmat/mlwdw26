@@ -14,8 +14,9 @@ is being developed at the Bavarian Academy of Sciences (BAdW) since
 
 ## Installation
 
-You can install the current version of mlwdw26 in R from
-[GitHub](https://github.com/) with:
+You can install and use the current version of mlwdw26 after you
+executed this in R:
 
-
+    install.packages("remotes")
     remotes::install_github("ATSzimmat/mlwdw26")
+    library(mlwdw26)
