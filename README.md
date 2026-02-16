@@ -19,21 +19,31 @@ is being developed at the Bavarian Academy of Sciences (BAdW) since
 This function converts .doc-files to .txt files using the LibreOffice
 program. The files used in the example are automatically loaded with the
 package and should be located in your project folder as a folder named
-“toy”, after you installed the package. Note: This function requires
+“toy”, after you installed the package. This function takes into account
+the outdated line-break logic of doc-files. Note: This function requires
 LibreOffice to be located in a folder named “Applications” and that you
 are currently using a Mac.
+
+#### Output
+
+A new folder was created containing the converted files. The name of
+this folder is the same as the folder containing the .doc-files, with
+“\_txt” appended to the end.
+
+#### Assumptions
+
+- The folder containing the .doc files contains only .doc files (and no
+  other documents or folders).
+
+- The user’s computer (importantly a Mac) has the same LibreOffice
+  program installed as the creator’s computer, and it is located in the
+  “Applications” folder.
 
 #### Usage
 
     convert_doc(doc_folder)
 
 with doc_folder being a path to a certain folder containing .doc-files.
-
-#### Value
-
-A new folder was created containing the converted files. The name of
-this folder is the same as the folder containing the .doc-files, with
-“\_txt” appended to the end.
 
 #### Example
 
