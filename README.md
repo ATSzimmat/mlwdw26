@@ -194,7 +194,7 @@ with a path to a certain folder containing the .mlw-files.
     toy_artikel <- create_df(mlw_folder = "toy/toy_mlw")
     View(toy_artikel)
 
-## Installation
+# Installation
 
 You can install and use the current version of mlwdw26 after you
 executed this in R:
