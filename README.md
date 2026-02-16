@@ -32,12 +32,12 @@ this folder is the same as the folder containing the .doc-files, with
 
 #### Assumptions
 
-- The folder containing the .doc files contains only .doc files (and no
-  other documents or folders).
+The folder containing the .doc files contains only .doc files (and no
+other documents or folders).
 
-- The user’s computer (importantly a Mac) has the same LibreOffice
-  program installed as the creator’s computer, and it is located in the
-  “Applications” folder.
+The user’s computer (importantly a Mac) has the same LibreOffice program
+installed as the creator’s computer, and it is located in the
+“Applications” folder.
 
 #### Usage
 
@@ -66,14 +66,62 @@ convert_doc on the doc_folder.
 An evidence dataset containing the columns “langer_beleg”, “pruef_beleg”
 and “pruef_stelle” and that is ready for use with merge_df
 
+#### Assumptions
+
+The following expressions in the source material have no special meaning
+and can be deleted without further ado:
+
+- Arabic numerals (with a p.:\* or l.:*)* before them or in parentheses
+  () or \<\> or \[\] or with \[a-z\] after them or a period
+
+- Roman or Arabic numerals at the beginning of a line (with a period
+  after them)\*
+
+- The expression “\t”
+
+- The characters ……/\|\*«»„“+¯\_\<\>”’\[\]
+
+- Any expressions in parentheses
+
+Lines of the following type in the source material (noted as
+pseudo-regular expressions) have no special meaning and can be deleted
+without further ado:
+
+- Roman or Arabic numerals (with a period after them)\*, which occupy an
+  entire line
+
+- “Achtung Sonderzeichen\|Sonderzeichen\|Sonderzeichen
+  unterstrichen!\*”, which occupy an entire line
+
+- “Korrektur” as the beginning of a line
+
+- “Rasur von \[arabische Zahl\] Zeile(n)” that occupy an entire line
+
+- “Druckfehler verbessert” that occupy an entire line
+
+- “Latitudo \[Arabic or Roman numeral\]” that occupy an entire line
+
+- “Longitudo \[Arabic or Roman numeral\]”
+
+- “Überstreichungen Korrekturen” that occupy an entire line
+
+- “ACHTUNG: GRIECHISCH” that occupy an entire line
+
+- “Achtung:” as beginning of line
+
+- “Druckfehler verbessert:” as beginning of line
+
 #### Usage
 
     create_df_2(txt_folder)
 
+with txt_folder being a path to a certain folder containing the
+.txt-files.
+
 #### Example
 
     # Create the evidence dataFrame
-    toy_belege <- create_df_2("toy/toy_doc_txt")
+    toy_belege <- create_df_2(txt_folder = "toy/toy_doc_txt")
     # View the result
     View(toy_belege)
 
