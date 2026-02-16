@@ -12,7 +12,7 @@ Welcome to the R package mlwdw26 – a new tool for organizing the data generate
 
 ## Functions
 
-### convert_doc
+### *convert_doc*
 
 #### Description
 
@@ -43,7 +43,7 @@ with doc_folder being a path to a certain folder containing .doc-files.
 convert_doc(doc_folder = "toy/toy_doc")
 ```
 
-### create_df_2
+### *create_df_2*
 
 #### Decription
 
@@ -130,7 +130,7 @@ toy_belege <- create_df_2(txt_folder = "toy/toy_doc_txt")
 View(toy_belege)
 ```
 
-### create_df
+### *create_df*
 
 #### Description
 

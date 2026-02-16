@@ -12,7 +12,7 @@ is being developed at the Bavarian Academy of Sciences (BAdW) since
 
 ## Functions
 
-### convert_doc
+### *convert_doc*
 
 #### Description
 
@@ -50,7 +50,7 @@ with doc_folder being a path to a certain folder containing .doc-files.
     # Convert the .doc-files from a example folder with .doc-files from the toy folder
     convert_doc(doc_folder = "toy/toy_doc")
 
-### create_df_2
+### *create_df_2*
 
 #### Decription
 
@@ -163,7 +163,7 @@ with txt_folder being a path to a certain folder containing the
     # View the result
     View(toy_belege)
 
-### create_df
+### *create_df*
 
 #### Description
 
