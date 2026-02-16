@@ -12,9 +12,9 @@ is being developed at the Bavarian Academy of Sciences (BAdW) since
 
 ## Functions
 
-### *convert_doc*
+## *convert_doc*
 
-#### Description
+### Description
 
 - This function converts .doc-files to .txt files using the LibreOffice
   program. The files used in the example are automatically loaded with
@@ -27,13 +27,13 @@ is being developed at the Bavarian Academy of Sciences (BAdW) since
 - Note: This function requires LibreOffice to be located in a folder
   named “Applications” and that you are currently using a Mac.
 
-#### Output
+### Output
 
 - A new folder was created containing the converted files. The name of
   this folder is the same as the folder containing the .doc-files, with
   “\_txt” appended to the end.
 
-#### Assumptions
+### Assumptions
 
 - The folder containing the .doc files contains only .doc files (and no
   other documents or folders).
@@ -42,20 +42,20 @@ is being developed at the Bavarian Academy of Sciences (BAdW) since
   program installed as the creator’s computer, and it is located in the
   “Applications” folder.
 
-#### Usage
+### Usage
 
     convert_doc(doc_folder)
 
 with doc_folder being a path to a certain folder containing .doc-files.
 
-#### Example
+### Example
 
     # Convert the .doc-files from a example folder with .doc-files from the toy folder
     convert_doc(doc_folder = "toy/toy_doc")
 
-### *create_df_2*
+## *create_df_2*
 
-#### Decription
+### Decription
 
 - This function creates a Dataset from all .txt-files located in the
   specified folder, containing the columns “langer_beleg”, “pruef_beleg”
@@ -94,13 +94,13 @@ with doc_folder being a path to a certain folder containing .doc-files.
   reduces words longer than 3 letters and spaces, and converts all
   uppercase letters to lowercase
 
-#### Output
+### Output
 
 - An evidence dataset containing the columns “langer_beleg”,
   “pruef_beleg” and “pruef_stelle” and that is ready for use with
   merge_df
 
-#### Assumptions
+### Assumptions
 
 - The folder containing the .txt-files contains only .txt-files (and no
   other documents or folders).
@@ -154,42 +154,44 @@ with doc_folder being a path to a certain folder containing .doc-files.
 
   - “Druckfehler verbessert:” as beginning of line
 
-#### Usage
+### Usage
 
     create_df_2(txt_folder)
 
 with txt_folder being a path to a certain folder containing the
 .txt-files.
 
-#### Example
+### Example
 
     # Create the evidence dataFrame
     toy_belege <- create_df_2(txt_folder = "toy/toy_doc_txt")
     # View the result
     View(toy_belege)
 
-### *create_df*
+## *create_df*
 
-#### Description
+### Description
 
-This function creates a DataFrame from all .mlw-files located in the
-specified folder, containing the columns “lemma”, “u\*\_bedeutung”,
-“zitat” and “stelle”. The files used in the example were automatically
-loaded with the package and should be located in your project folder as
-a folder named “toy”, after you installed the package.
+- This function creates a DataFrame from all .mlw-files located in the
+  specified folder, containing the columns “lemma”, “u\*\_bedeutung”,
+  “zitat” and “stelle”.
 
-#### Output
+- The files used in the example were automatically loaded with the
+  package and should be located in your project folder as a folder named
+  “toy”, after you installed the package.
 
-An article dataset containing the columns “lemma”, “u\*\_bedeutung”,
-“zitat” and “stelle” and that is ready for use with merge_df
+### Output
 
-#### Usage
+- An article dataset containing the columns “lemma”, “u\*\_bedeutung”,
+  “zitat” and “stelle” and that is ready for use with merge_df
+
+### Usage
 
     create_df(mlw_folder)
 
 with a path to a certain folder containing the .mlw-files.
 
-#### Example
+### Example
 
     toy_artikel <- create_df(mlw_folder = "toy/toy_mlw")
     View(toy_artikel)
