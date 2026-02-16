@@ -336,7 +336,7 @@ with a path to a certain folder containing the .mlw-files.
 - A = Does the candidate sentence from the source dataset contain all
   the words of the quote?
 
-- B = Do the first three words of the quote’s location match those of
+- B = Do the first 3 or 1 word(s) of the quote’s location match those of
   the text in the source dataset?
 
 - C = Is the quote at least five words long?
