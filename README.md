@@ -8,6 +8,15 @@ generated in the creation of the Medieval Latin Dictionary (MLW), which
 is being developed at the Bavarian Academy of Sciences (BAdW) since
 1939!
 
+The primary goal of the package is to organize the articles of the MLW
+into a structured tabular format and to supplement and extend the often
+rather short citations provided as evidence in the articles using the
+source texts from which these citations were taken. This was intended,
+above all, to provide users with greater transparency regarding the data
+collected during the creation of the existing MLW articles and to enable
+the application of machine learning methods to this data in various
+research contexts.
+
 # Installation
 
 You can install and use the current version of mlwdw26 after you
