@@ -8,6 +8,7 @@
 #' @examples
 #' # Create the article dataFrame
 #' toy_artikel <- create_df(mlw_folder = "toy/toy_mlw")
+#' # View the result
 #' View(toy_artikel)
 create_df <- function(mlw_folder) {
   # Alle mlw-Datei im Ordner auflisten

@@ -18,5 +18,6 @@ This function creates a DataFrame from all .mlw-files located in the specified f
 \examples{
 # Create the article dataFrame
 toy_artikel <- create_df(mlw_folder = "toy/toy_mlw")
+# View the result
 View(toy_artikel)
 }

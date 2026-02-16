@@ -140,9 +140,81 @@ View(toy_belege)
 
 -   The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package.
 
+-   The functtion leans up the lemma information, adds the field name ZITAT, renames the field name UNTER_BEDEUTUNG to BEDEUTUNG and
+
+-   Entries that do not have a field name such as BEDEUTUNG or LEMMA are recursively appended to the last entry with a field name
+
+-   Replaces the field name ANHÄNGER with the field name of the last member of the U\*\_BEDEUTUNG-layers
+
+-   The function removes all elements in the quote column that do not belong to the actual quoted text.
+
+-   The function is not limited to a specific number of layers of meaning but dynamically adds as many layers of meaning as necessary.
+
+-   Reduces the lemma entry to its first word.
+
+-   Removes all entries in (((()))), (()), (), {{}}, {}, \<\<\>\>, \<\>, '' in the quote column.
+
+-   Removes all \\\|#/\\.\^\*:‘; in the quote column. - All non-letters are removed from the reference, leaving only the first 3 words.
+
+-   The citation column is reduced to words longer than 3 letters and spaces, and all capital letters are converted to lowercase.
+
+-   Because there is an irregular use of the letters u and v between the source texts and the quotations, all v's are replaced with u.
+
+-   Splits lines containing multiple quotations into individual quotations.
+
+-   Adds missing references that were not recorded when entering multiple quotations in one column.
+
+-   Removes line and page numbers from the references.
+
+-   All non-letters are removed from the reference, leaving only the first 3 words.
+
 ### Output
 
 -   An article dataset containing the columns "lemma", "u\*\_bedeutung", "zitat" and "stelle" and that is ready for use with merge_df
+
+### Assumptions
+
+-   The folder containing the mlw files contains only mlw files (and no other documents or folders).
+
+-   Any Arabic numerals, annotations in parentheses () or curly braces {} in the lemma entry have no special meaning and can be deleted without further ado.
+
+-   All citations in the mlw files begin with an asterisk (\*).
+
+-   Entries with the following field names can be removed without further ado:
+
+    -   AUTOR(IN)
+
+    -   STRUKTUR
+
+    -   ETYMOLOGIE
+
+    -   GRAMMATIK
+
+    -   VEL
+
+    -   METRIK
+
+    -   SCHREIBWEISE
+
+    -   UNTERDRÜCKE
+
+    -   GEBRAUCH
+
+    -   Absatz
+
+    -   ANHÄNGER
+
+<!-- -->
+
+-   The first word of the lemma entry is sufficient, and the rest can be deleted without further ado.
+
+-   All entries in (((()))), (()), (), {{}}, {}, \<\<\>\>, \<\>, '' in the quote column have no special meaning and can be deleted without further ado.
+
+-   All \\\|#/\\.\^\*:‘; in the quote column have no special meaning and can be deleted without further ado.
+
+-   All quotations are enclosed in quotation marks.
+
+-   Everything in columns containing quotations, between the quotation marks, belongs to the source reference.
 
 ### Usage
 
