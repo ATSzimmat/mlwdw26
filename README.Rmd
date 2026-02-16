@@ -260,6 +260,14 @@ View(toy_artikel)
 
 ### Conditions for a match
 
+-   A = Does the candidate sentence from the source dataset contain all the words of the quote?
+
+-   B = Do the first three words of the quote's location match those of the text in the source dataset?
+
+-   C = Is the quote at least five words long?
+
+-   D = Does the candidate sentence contain the lemma for which the quote was created?
+
 ### Output
 
 -   An article dataset with extended citations

@@ -333,6 +333,17 @@ with a path to a certain folder containing the .mlw-files.
 
 ### Conditions for a match
 
+- A = Does the candidate sentence from the source dataset contain all
+  the words of the quote?
+
+- B = Do the first three words of the quote’s location match those of
+  the text in the source dataset?
+
+- C = Is the quote at least five words long?
+
+- D = Does the candidate sentence contain the lemma for which the quote
+  was created?
+
 ### Output
 
 - An article dataset with extended citations
