@@ -288,5 +288,5 @@ errors <- readr::read_csv("fehler.csv")
 View(errors)
 # View the quotes with several possible partners
 ambiguous <- readr::read_csv("nicht_eindeutig.csv")
-# View(ambiguous)
+View(ambiguous)
 ```

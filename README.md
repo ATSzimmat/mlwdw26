@@ -361,4 +361,4 @@ being an evidence dataset created by create_df_2
     View(errors)
     # View the quotes with several possible partners
     ambiguous <- readr::read_csv("nicht_eindeutig.csv")
-    # View(ambiguous)
+    View(ambiguous)

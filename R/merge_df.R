@@ -16,7 +16,7 @@
 #' View(errors)
 #' # View the quotes with several possible partners
 #' ambiguous <- readr::read_csv("nicht_eindeutig.csv")
-#' # View(ambiguous)
+#' View(ambiguous)
 #'
 merge_df <- function(lem_dat, bel_dat) {
   lem_dat <- lem_dat %>%
