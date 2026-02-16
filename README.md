@@ -284,7 +284,9 @@ with a path to a certain folder containing the .mlw-files.
 
 ### Example
 
+    # Create the article dataFrame
     toy_artikel <- create_df(mlw_folder = "toy/toy_mlw")
+    # View the result
     View(toy_artikel)
 
 # Installation
