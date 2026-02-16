@@ -32,7 +32,7 @@ A new folder was created containing the converted files. The name of this folder
 
 ```         
 # Convert the .doc-files from a example folder with .doc-files from the toy folder
-convert_doc("toy/toy_doc")
+convert_doc(doc_folder = "toy/toy_doc")
 ```
 
 ## Installation

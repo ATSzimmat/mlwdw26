@@ -36,7 +36,7 @@ this folder is the same as the folder containing the .doc-files, with
 #### Example
 
     # Convert the .doc-files from a example folder with .doc-files from the toy folder
-    convert_doc("toy/toy_doc")
+    convert_doc(doc_folder = "toy/toy_doc")
 
 ## Installation
 
