@@ -8,6 +8,15 @@ generated in the creation of the Medieval Latin Dictionary (MLW), which
 is being developed at the Bavarian Academy of Sciences (BAdW) since
 1939!
 
+# Installation
+
+You can install and use the current version of mlwdw26 after you
+executed this in R:
+
+    install.packages("remotes")
+    remotes::install_github("ATSzimmat/mlwdw26")
+    library(mlwdw26)
+
 # Functions
 
 ## *convert_doc*
@@ -289,11 +298,4 @@ with a path to a certain folder containing the .mlw-files.
     # View the result
     View(toy_artikel)
 
-# Installation
-
-You can install and use the current version of mlwdw26 after you
-executed this in R:
-
-    install.packages("remotes")
-    remotes::install_github("ATSzimmat/mlwdw26")
-    library(mlwdw26)
+# 
