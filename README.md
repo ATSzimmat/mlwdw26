@@ -16,28 +16,31 @@ is being developed at the Bavarian Academy of Sciences (BAdW) since
 
 #### Description
 
-This function converts .doc-files to .txt files using the LibreOffice
-program. The files used in the example are automatically loaded with the
-package and should be located in your project folder as a folder named
-“toy”, after you installed the package. This function takes into account
-the outdated line-break logic of doc-files. Note: This function requires
-LibreOffice to be located in a folder named “Applications” and that you
-are currently using a Mac.
+- This function converts .doc-files to .txt files using the LibreOffice
+  program. The files used in the example are automatically loaded with
+  the package and should be located in your project folder as a folder
+  named “toy”, after you installed the package.
+
+- This function takes into account the outdated line-break logic of
+  doc-files.
+
+- Note: This function requires LibreOffice to be located in a folder
+  named “Applications” and that you are currently using a Mac.
 
 #### Output
 
-A new folder was created containing the converted files. The name of
-this folder is the same as the folder containing the .doc-files, with
-“\_txt” appended to the end.
+- A new folder was created containing the converted files. The name of
+  this folder is the same as the folder containing the .doc-files, with
+  “\_txt” appended to the end.
 
 #### Assumptions
 
-The folder containing the .doc files contains only .doc files (and no
-other documents or folders).
+- The folder containing the .doc files contains only .doc files (and no
+  other documents or folders).
 
-The user’s computer (importantly a Mac) has the same LibreOffice program
-installed as the creator’s computer, and it is located in the
-“Applications” folder.
+- The user’s computer (importantly a Mac) has the same LibreOffice
+  program installed as the creator’s computer, and it is located in the
+  “Applications” folder.
 
 #### Usage
 
@@ -54,100 +57,102 @@ with doc_folder being a path to a certain folder containing .doc-files.
 
 #### Decription
 
-This function creates a Dataset from all .txt-files located in the
-specified folder, containing the columns “langer_beleg”, “pruef_beleg”
-and “pruef_stelle”. The files used in the example were automatically
-loaded with the package and should be located in your project folder as
-a folder named “toy”, after you installed the package and executed
-convert_doc on the doc_folder.
+- This function creates a Dataset from all .txt-files located in the
+  specified folder, containing the columns “langer_beleg”, “pruef_beleg”
+  and “pruef_stelle”. The files used in the example were automatically
+  loaded with the package and should be located in your project folder
+  as a folder named “toy”, after you installed the package and executed
+  convert_doc on the doc_folder.
 
-The lines of the .txt files are split according to sentences (ending
-with . ! or ?), and lines split by entries are merged (words split by
-hyphenation are rejoined).
+- The lines of the .txt files are split according to sentences (ending
+  with . ! or ?), and lines split by entries are merged (words split by
+  hyphenation are rejoined).
 
-Entries in () and sentences consisting of only one word (one or more
-letters) are excluded from this process - the latter is intended, among
-other things, to handle abbreviations.
+- Entries in () and sentences consisting of only one word (one or more
+  letters) are excluded from this process - the latter is intended,
+  among other things, to handle abbreviations.
 
-Consecutive word strings in all caps are given their own line.
-Beforehand, some cleanup operations are performed that could interfere
-with the line splitting process.
+- Consecutive word strings in all caps are given their own line.
+  Beforehand, some cleanup operations are performed that could interfere
+  with the line splitting process.
 
-Edition references in () are removed from the text file names (e.g.,
-(ed. N. Bubnov, Gerberti opera math. 1899. p. 203,7)).
+- Edition references in () are removed from the text file names (e.g.,
+  (ed. N. Bubnov, Gerberti opera math. 1899. p. 203,7)).
 
-In the event that a sentence ends with an abbreviation and thus part of
-the sentence would be cut off, the next sentence is appended to
-sentences that are at most 5 words long.
+- In the event that a sentence ends with an abbreviation and thus part
+  of the sentence would be cut off, the next sentence is appended to
+  sentences that are at most 5 words long.
 
-Since there is between the supporting texts and quotations contain an
-irregular use of the letters u and v, all v’s are replaced by u.
+- Since there is between the supporting texts and quotations contain an
+  irregular use of the letters u and v, all v’s are replaced by u.
 
-All non-letters are removed from the reference, and only the first 3
-words of the reference are retained.
+- All non-letters are removed from the reference, and only the first 3
+  words of the reference are retained.
 
-Afterwards the function creates two new columns from the text column
-(long_document and test_document), where the test_document column
-reduces words longer than 3 letters and spaces, and converts all
-uppercase letters to lowercase
+- Afterwards the function creates two new columns from the text column
+  (long_document and test_document), where the test_document column
+  reduces words longer than 3 letters and spaces, and converts all
+  uppercase letters to lowercase
 
 #### Output
 
-An evidence dataset containing the columns “langer_beleg”, “pruef_beleg”
-and “pruef_stelle” and that is ready for use with merge_df
+- An evidence dataset containing the columns “langer_beleg”,
+  “pruef_beleg” and “pruef_stelle” and that is ready for use with
+  merge_df
 
 #### Assumptions
 
-The folder containing the .txt-files contains only .txt-files (and no
-other documents or folders).
+- The folder containing the .txt-files contains only .txt-files (and no
+  other documents or folders).
 
-The editorial notes in parentheses in the .txt file names have no
-special meaning and can be deleted without further ado.
+- The editorial notes in parentheses in the .txt file names have no
+  special meaning and can be deleted without further ado.
 
-Sentences ending with an abbreviation are no more than 5 words long.
+- Sentences ending with an abbreviation are no more than 5 words long.
 
-The following expressions in the source material have no special meaning
-and can be deleted without further ado:
+- The following expressions in the source material have no special
+  meaning and can be deleted without further ado:
 
-- Arabic numerals (with a p.:\* or l.:*)* before them or in parentheses
-  () or \<\> or \[\] or with \[a-z\] after them or a period
+  - Arabic numerals (with a p.:\* or l.:*)* before them or in
+    parentheses () or \<\> or \[\] or with \[a-z\] after them or a
+    period
 
-- Roman or Arabic numerals at the beginning of a line (with a period
-  after them)\*
+  - Roman or Arabic numerals at the beginning of a line (with a period
+    after them)\*
 
-- The expression “\t”
+  - The expression “\t”
 
-- The characters ……/\|\*«»„“+¯\_\<\>”’\[\]
+  - The characters ……/\|\*«»„“+¯\_\<\>”’\[\]
 
-- Any expressions in parentheses
+  - Any expressions in parentheses
 
-Lines of the following type in the source material (noted as
-pseudo-regular expressions) have no special meaning and can be deleted
-without further ado:
+- Lines of the following type in the source material (noted as
+  pseudo-regular expressions) have no special meaning and can be deleted
+  without further ado:
 
-- Roman or Arabic numerals (with a period after them)\*, which occupy an
-  entire line
+  - Roman or Arabic numerals (with a period after them)\*, which occupy
+    an entire line
 
-- “Achtung Sonderzeichen\|Sonderzeichen\|Sonderzeichen
-  unterstrichen!\*”, which occupy an entire line
+  - “Achtung Sonderzeichen\|Sonderzeichen\|Sonderzeichen
+    unterstrichen!\*”, which occupy an entire line
 
-- “Korrektur” as the beginning of a line
+  - “Korrektur” as the beginning of a line
 
-- “Rasur von \[arabische Zahl\] Zeile(n)” that occupy an entire line
+  - “Rasur von \[arabische Zahl\] Zeile(n)” that occupy an entire line
 
-- “Druckfehler verbessert” that occupy an entire line
+  - “Druckfehler verbessert” that occupy an entire line
 
-- “Latitudo \[Arabic or Roman numeral\]” that occupy an entire line
+  - “Latitudo \[Arabic or Roman numeral\]” that occupy an entire line
 
-- “Longitudo \[Arabic or Roman numeral\]”
+  - “Longitudo \[Arabic or Roman numeral\]”
 
-- “Überstreichungen Korrekturen” that occupy an entire line
+  - “Überstreichungen Korrekturen” that occupy an entire line
 
-- “ACHTUNG: GRIECHISCH” that occupy an entire line
+  - “ACHTUNG: GRIECHISCH” that occupy an entire line
 
-- “Achtung:” as beginning of line
+  - “Achtung:” as beginning of line
 
-- “Druckfehler verbessert:” as beginning of line
+  - “Druckfehler verbessert:” as beginning of line
 
 #### Usage
 
