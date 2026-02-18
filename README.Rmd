@@ -8,11 +8,11 @@ output: github_document
 
 Welcome to the R package mlwdw26 – a new tool for organizing the data generated in the creation of the Medieval Latin Dictionary (MLW), which is being developed at the Bavarian Academy of Sciences (BAdW) since 1939!
 
-The primary goal of the package is to organize the articles of the MLW into a structured tabular format and to supplement and extend the often rather short citations provided as evidence in the articles using the source texts from which these citations were taken. This was intended, above all, to provide users with greater transparency regarding the data collected during the creation of the existing MLW articles and to enable the application of machine learning methods to this data in various research contexts.
+The primary goal of the package is to organize the articles of the MLW into a structured tabular format and to supplement and extend the often rather short quotations provided as evidence in the articles using the source texts from which these quotations were taken. This was intended, above all, to provide users of this data with greater transparency and to enable the application of machine learning methods to the data in various research contexts.
 
 # Installation
 
-You can install and use the current version of mlwdw26 after you executed this in R:
+You can install the current version of mlwdw26 by executing this in R:
 
 ```         
 install.packages("remotes")
@@ -27,9 +27,11 @@ library(mlwdw26)
 
 ### Description
 
--   This function converts .doc-files to .txt files using the LibreOffice program. The files used in the example are automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package.
+-   This function converts all .doc-files in the specified folder to .txt-files using the LibreOffice program and gives back a folder with the converted files.
 
--   This function takes into account the outdated line-break logic of doc-files.
+-   The files used in the example below are automatically loaded with the package and should be located in your project folder in a folder named "toy", after you installed the package.
+
+-   This function takes into account the outdated line-break logic of the .doc-files.
 
 -   Note: This function requires LibreOffice to be located in a folder named "Applications" and that you are currently using a Mac.
 
@@ -39,9 +41,9 @@ library(mlwdw26)
 
 ### Assumptions
 
--   The folder containing the .doc files contains only .doc files (and no other documents or folders).
+-   The folder containing the .doc-files contains only .doc-files (so no other documents or even folders containing .doc-files).
 
--   The user's computer (importantly a Mac) has the same LibreOffice program installed as the creator's computer, and it is located in the "Applications" folder.
+-   The user's computer is a Mac and has the same LibreOffice program installed as the creator's computer that it is located in the "Applications" folder.
 
 ### Usage
 
@@ -62,51 +64,59 @@ convert_doc(doc_folder = "toy/toy_doc")
 
 ### Decription
 
--   This function creates a Dataset from all .txt-files located in the specified folder, containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle". The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package and executed convert_doc on the doc_folder.
+-   This function creates an Evidence-Dataset containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle" from all .txt-files located in the specified folder.
 
--   The lines of the .txt files are split according to sentences (ending with . ! or ?), and lines split by entries are merged (words split by hyphenation are rejoined).
+    -   The column "langer_beleg" contains the source texts whereby each line of the dataset only includes one sentence of the respective texts.
 
--   Entries in () and sentences consisting of only one word (one or more letters) are excluded from this process - the latter is intended, among other things, to handle abbreviations.
+    -   The column "pruef_beleg" includes a simplified version of the sentences. (only words longer than 3 letters and spaces, and all uppercase letters converted to lowercase.)
 
--   Consecutive word strings in all caps are given their own line. Beforehand, some cleanup operations are performed that could interfere with the line splitting process.
+    -   The column "pruef_stelle" contains the text file names of the texts of the source material
 
--   Edition references in () are removed from the text file names (e.g., (ed. N. Bubnov, Gerberti opera math. 1899. p. 203,7)).
+-   The files used in the example were automatically loaded with the package and should be located in your project folder in a folder named "toy", after you installed the package and executed convert_doc on the folder containing the .doc-files.
 
--   In the event that a sentence ends with an abbreviation and thus part of the sentence would be cut off, the next sentence is appended to sentences that are at most 5 words long.
+-   To ensure that each line of the dataset contains only one sentence, the lines of the .txt-files are split according to sentences (ending with . ! or ?), lines split in other ways are merged and words split by hyphenation are rejoined.
 
--   Since there is between the supporting texts and quotations contain an irregular use of the letters u and v, all v's are replaced by u.
+-   Beforehand, some cleanup operations are performed that could interfere with the line splitting process.
 
--   All non-letters are removed from the reference, and only the first 3 words of the reference are retained.
+    -   Entries in () and sentences consisting of only one word are excluded from this process - the latter is intended, among other things, to handle abbreviations.
 
--   Afterwards the function creates two new columns from the text column (long_document and test_document), where the test_document column reduces words longer than 3 letters and spaces, and converts all uppercase letters to lowercase
+    -   If a sentence includes an abbreviation, part of the sentence would be cut off as a result of the splitting. To handle this, sentences with a maximum of five words will be extended by the next sentence.
+
+    -   Edition references in () are removed from the text file names (e.g., (ed. N. Bubnov, Gerberti opera math. 1899. p. 203,7)).
+
+    -   Consecutive word strings in all caps are given their own line.
+
+    -   Since there is between the evidence-sentences and quotations an irregular use of the letters u and v, all v's are replaced by u's.
+
+-   All non-letters are removed from the text file names, and only the first 3 words of the text file names are retained.
 
 ### Output
 
--   An evidence dataset containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle" and that is ready for use with merge_df
+-   An Evidence-dataset containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle" and that is ready for use with merge_df.
 
 ### Assumptions
 
 -   The folder containing the .txt-files contains only .txt-files (and no other documents or folders).
 
--   The editorial notes in parentheses in the .txt file names have no special meaning and can be deleted without further ado.
+-   The editorial notes in () in the text file names have no special meaning and can be deleted without further ado.
 
 -   Sentences ending with an abbreviation are no more than 5 words long.
 
 -   The following expressions in the source material have no special meaning and can be deleted without further ado:
 
-    -   Arabic numerals (with a p.:\* or l.:*)* before them or in parentheses () or \<\> or [] or with [a-z] after them or a period
+    -   Arabic numerals (with a p.:\* or l.:) before them or in () or \<\> or [] or with [a-z] after them or a period
 
     -   Roman or Arabic numerals at the beginning of a line (with a period after them)\*
 
     -   The expression "\\t"
 
-    -   The characters ….../\|\*«»„“+¯\_\<\>”’[]
+    -   The characters .../\|\*«»„“+¯\_\<\>”’[]
 
-    -   Any expressions in parentheses
+    -   Any expressions in ()
 
--   Lines of the following type in the source material (noted as pseudo-regular expressions) have no special meaning and can be deleted without further ado:
+-   Lines of the following type in the source material have no special meaning and can be deleted without further ado:
 
-    -   Roman or Arabic numerals (with a period after them)\*, which occupy an entire line
+    -   Roman or Arabic numerals (with or without a point after them), which occupy an entire line
 
     -   "Achtung Sonderzeichen\|Sonderzeichen\|Sonderzeichen unterstrichen!\*", which occupy an entire line
 
@@ -149,37 +159,37 @@ View(toy_belege)
 
 ### Description
 
--   This function creates a DataFrame from all .mlw-files located in the specified folder, containing the columns "lemma", "u\*\_bedeutung", "zitat" and "stelle".
+-   This function creates an Article-Dataset from all .mlw-files located in the specified folder, containing the columns "lemma", "u\*\_bedeutung", "zitat" and "stelle".
+
+    -   The column "lemma" contains the specification of the observed lemma
+
+    -   The columns "u\*\_bedeutung" contain the meanings of the lemma in the respective "u\*\_bedeutung" layer
+
+    -   The column "zitat" contains the quotations whereby each line of the dataset only oncludes one quotation
+
+    -   The column "stelle" contains a reference which corresonds to name of the source text the quotation was taken from
 
 -   The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package.
 
--   The functtion leans up the lemma information, adds the field name ZITAT, renames the field name UNTER_BEDEUTUNG to BEDEUTUNG and
+-   The function leans up the lemma information, adds the field name ZITAT, renames the field name UNTER_BEDEUTUNG to U_BEDEUTUNG
 
--   Entries that do not have a field name such as BEDEUTUNG or LEMMA are recursively appended to the last entry with a field name
+-   Lines of the .mlw-files that do not have a field name such as BEDEUTUNG or LEMMA are recursively appended to the last entry with a field name
 
--   Replaces the field name ANHÄNGER with the field name of the last member of the U\*\_BEDEUTUNG-layers
+-   The function replaces the field name ANHÄNGER with the field name of the last member of the U\*\_BEDEUTUNG-layers
 
--   The function removes all elements in the quote column that do not belong to the actual quoted text.
+-   The function is not limited to a specific number of U\*BEDEUTUNG layers but dynamically adds as many U\*BEDEUTUNG layers as necessary.
 
--   The function is not limited to a specific number of layers of meaning but dynamically adds as many layers of meaning as necessary.
+-   The function educes the lemma entry to its first word.
 
--   Reduces the lemma entry to its first word.
+-   The function removes all \\\|#/\\.\^\*:‘; and all entries in (((()))), (()), (), {{}}, {}, \<\<\>\>, \<\>, '' in the quotation column.
 
--   Removes all entries in (((()))), (()), (), {{}}, {}, \<\<\>\>, \<\>, '' in the quote column.
+-   All non-letters are removed from the reference, leaving only the first 3 words.
 
--   Removes all \\\|#/\\.\^\*:‘; in the quote column. - All non-letters are removed from the reference, leaving only the first 3 words.
-
--   The citation column is reduced to words longer than 3 letters and spaces, and all capital letters are converted to lowercase.
+-   The quotation column is reduced to words longer than 3 letters and spaces, and all capital letters are converted to lowercase.
 
 -   Because there is an irregular use of the letters u and v between the source texts and the quotations, all v's are replaced with u.
 
--   Splits lines containing multiple quotations into individual quotations.
-
--   Adds missing references that were not recorded when entering multiple quotations in one column.
-
--   Removes line and page numbers from the references.
-
--   All non-letters are removed from the reference, leaving only the first 3 words.
+-   The functions splits lines containing multiple quotations into individual quotations.
 
 ### Output
 
@@ -187,13 +197,13 @@ View(toy_belege)
 
 ### Assumptions
 
--   The folder containing the mlw files contains only mlw files (and no other documents or folders).
+-   The folder containing the .mlw-files contains only .mlw-files (and no other documents or folders).
 
--   Any Arabic numerals, annotations in parentheses () or curly braces {} in the lemma entry have no special meaning and can be deleted without further ado.
+-   Any Arabic numerals, annotations in () or {} in the lemma entry have no special meaning and can be deleted without further ado.
 
--   All citations in the mlw files begin with an asterisk (\*).
+-   All citations in the .mlw-files begin with a star \*.
 
--   Entries with the following field names can be removed without further ado:
+-   Paragraphs in the -mlw-files with the following field names can be removed without further ado:
 
     -   AUTOR(IN)
 
@@ -215,8 +225,6 @@ View(toy_belege)
 
     -   Absatz
 
-    -   ANHÄNGER
-
 <!-- -->
 
 -   The first word of the lemma entry is sufficient, and the rest can be deleted without further ado.
@@ -227,7 +235,7 @@ View(toy_belege)
 
 -   All quotations are enclosed in quotation marks.
 
--   Everything in columns containing quotations, between the quotation marks, belongs to the source reference.
+-   Everything quotation-column, between the quotation marks, belongs to the source reference.
 
 ### Usage
 
