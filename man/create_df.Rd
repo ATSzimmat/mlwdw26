@@ -13,7 +13,7 @@ create_df(mlw_folder)
 An article dataset containing the columns "lemma", "u*_bedeutung", "zitat" and "stelle" and that is ready for use with merge_df
 }
 \description{
-This function creates a dataset from all .mlw-files located in the specified folder, containing the columns "lemma", "u*_bedeutung", "zitat" and "stelle".The files used in the example below are available on the GitHub repository in a folder named "toy". You should load that folder in your project folder before using this function. Please execute the example code manually and don't use the run_examples button. For further informations see https://github.com/ATSzimmat/mlwdw26.
+This function creates a dataset from all .mlw-files located in the specified folder, containing the columns "lemma", "u*_bedeutung", "zitat" and "stelle".The folder used in the example below is available on the GitHub repository in a folder named "toy". You should load the folder with the .mlw-files you want to use in your project folder before using this function. Please execute the example code manually and don't use the run_examples button. For further informations see https://github.com/ATSzimmat/mlwdw26.
 }
 \examples{
 # Create the Article-dataset

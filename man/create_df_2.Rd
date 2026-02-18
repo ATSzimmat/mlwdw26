@@ -13,7 +13,7 @@ create_df_2(txt_folder)
 An evidence dataset containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle" and that is ready for use with merge_df
 }
 \description{
-This function creates a dataset from all .txt-files located in the specified folder, containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle". The files used in the example below are available on the GitHub repository in a folder named "toy". You should load that folder in your project folder and execute convert_doc on the respective files before using this function. Please execute the example code manually and don't use the run_examples button.For further informations see https://github.com/ATSzimmat/mlwdw26.
+This function creates a dataset from all .txt-files located in the specified folder, containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle". The folder used in the example below is available on the GitHub repository in a folder named "toy". You have to use convert_doc on the folder before executing the example code. The folder containing the .txt-files you want to use should be located in your project folder before using this function. Please execute the example code manually and don't use the run_examples button.For further informations see https://github.com/ATSzimmat/mlwdw26.
 }
 \examples{
 # Create the Evidence-dataset
