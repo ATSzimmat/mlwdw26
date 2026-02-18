@@ -35,9 +35,9 @@ You can install the current version of mlwdw26 by executing this in R:
   .txt-files using the LibreOffice program and gives back a folder with
   the converted files.
 
-- The files used in the example below are automatically loaded with the
-  package and should be located in your project folder in a folder named
-  “toy”, after you installed the package.
+- The files used in the example below are available on the GitHub
+  repository in a folder named “toy”. You should load that folder in
+  your project folder before using this function.
 
 - This function takes into account the outdated line-break logic of the
   .doc-files.
@@ -52,6 +52,9 @@ You can install the current version of mlwdw26 by executing this in R:
   “\_txt” appended to the end.
 
 ### Assumptions
+
+- The files used in the example below are located in your project folder
+  in a folder named “toy”.
 
 - The folder containing the .doc-files contains only .doc-files (so no
   other documents or even folders containing .doc-files).
@@ -68,14 +71,14 @@ with doc_folder being a path to a certain folder containing .doc-files.
 
 ### Example
 
-    # Convert the .doc-files from a example folder with .doc-files from the toy folder
+    # Convert the .doc-files from an example folder 
     convert_doc(doc_folder = "toy/toy_doc")
 
 ## *create_df_2*
 
 ### Decription
 
-- This function creates an Evidence-Dataset containing the columns
+- This function creates an Evidence-dataset containing the columns
   “langer_beleg”, “pruef_beleg” and “pruef_stelle” from all .txt-files
   located in the specified folder.
 
@@ -90,10 +93,10 @@ with doc_folder being a path to a certain folder containing .doc-files.
   - The column “pruef_stelle” contains the text file names of the texts
     of the source material
 
-- The files used in the example were automatically loaded with the
-  package and should be located in your project folder in a folder named
-  “toy”, after you installed the package and executed convert_doc on the
-  folder containing the .doc-files.
+- The files used in the example below are available on the GitHub
+  repository in a folder named “toy”. You should load that folder in
+  your project folder and execute convert_doc on the respective files
+  before using this function.
 
 - To ensure that each line of the dataset contains only one sentence,
   the lines of the .txt-files are split according to sentences (ending
@@ -129,6 +132,10 @@ with doc_folder being a path to a certain folder containing .doc-files.
   merge_df.
 
 ### Assumptions
+
+- The files used in the example below are located in your project folder
+  in a folder named “toy” and you have executed convert_doc on the
+  folder containing the .doc-files.
 
 - The folder containing the .txt-files contains only .txt-files (and no
   other documents or folders).
@@ -189,7 +196,7 @@ with txt_folder being a path to a certain folder containing the
 
 ### Example
 
-    # Create the evidence dataFrame
+    # Create an Evidence-dataset
     toy_belege <- create_df_2(txt_folder = "toy/toy_doc_txt")
     # View the result
     View(toy_belege)
@@ -198,7 +205,7 @@ with txt_folder being a path to a certain folder containing the
 
 ### Description
 
-- This function creates an Article-Dataset from all .mlw-files located
+- This function creates an Article-dataset from all .mlw-files located
   in the specified folder, containing the columns “lemma”,
   “u\*\_bedeutung”, “zitat” and “stelle”.
 
@@ -213,9 +220,9 @@ with txt_folder being a path to a certain folder containing the
   - The column “stelle” contains a reference which corresonds to name of
     the source text the quotation was taken from
 
-- The files used in the example were automatically loaded with the
-  package and should be located in your project folder as a folder named
-  “toy”, after you installed the package.
+- The files used in the example below are available on the GitHub
+  repository in a folder named “toy”. You should load that folder in
+  your project folder before using this function.
 
 - The function leans up the lemma information, adds the field name
   ZITAT, renames the field name UNTER_BEDEUTUNG to U_BEDEUTUNG
@@ -249,10 +256,13 @@ with txt_folder being a path to a certain folder containing the
 
 ### Output
 
-- An article dataset containing the columns “lemma”, “u\*\_bedeutung”,
+- An Article-dataset containing the columns “lemma”, “u\*\_bedeutung”,
   “zitat” and “stelle” and that is ready for use with merge_df
 
 ### Assumptions
+
+- The files used in the example below are located in your project folder
+  in a folder named “toy”.
 
 - The folder containing the .mlw-files contains only .mlw-files (and no
   other documents or folders).
@@ -294,8 +304,8 @@ with txt_folder being a path to a certain folder containing the
   quote column have no special meaning and can be deleted without
   further ado.
 
-- All \\#/\\^\*:’; in the quote column have no special meaning and can
-  be deleted without further ado.
+- All \\#/.^\*:’; in the quote column have no special meaning and can be
+  deleted without further ado.
 
 - All quotations are enclosed in quotation marks.
 
@@ -310,7 +320,7 @@ with a path to a certain folder containing the .mlw-files.
 
 ### Example
 
-    # Create the article dataFrame
+    # Create an Article-dataset
     toy_artikel <- create_df(mlw_folder = "toy/toy_mlw")
     # View the result
     View(toy_artikel)
@@ -319,32 +329,38 @@ with a path to a certain folder containing the .mlw-files.
 
 ### Description
 
-- This function takes an article dataset created by create_df and an
-  evidence dataset created by create_df_2 and gives back an article
-  dataset with extended citations.
+- This function takes an Article-dataset created by create_df and an
+  Evidence-dataset created by create_df_2 and gives back an
+  Article-dataset with extended quotes.
 
-- All citations from the article dataset for which no suitable partner
-  could be found are stored separately in a CSV-file, including
-  metadata, and the sources of error are explicitly stated. The files
-  used in the example were automatically loaded with the package and
-  should be located in your project folder as a folder named “toy”,
-  after you installed the package and executed convert_doc, create_df
-  and create_df_2.
+- The function compares the entries of the “pruef_beleg” column of the
+  Evidence-dataset with the entries of the “zitat” column of the
+  Article-dataset and adds the entries of the “langer_beleg” column to
+  the Article-dataset in the line of the respective quotation if the
+  comparision indicates a match
 
-- All citations for which the function found no matching partner are
-  saved in a CSV file, always named “fehler.csv”. The source of the
-  error that led to the missing partner is explicitly indicated.
+- The conditions for a match are stated below
 
-- All citations for which the function found multiple possible partners
-  are saved in a CSV file, always named “nicht_eindeutig.csv”.
+- All quotes from the Article-dataset for which no suitable partner
+  could be found are stored separately in a CSV-file, always named
+  “fehler.csv”, including metadata, and the conditions that were met or
+  not met are explicitly stated.
+
+- All quotes for which the function found multiple possible partners are
+  saved in a CSV file, always named “nicht_eindeutig.csv”.
+
+- The data used in the example below is available on the GitHub
+  repository in a folder named “toy”. You should load that folder in
+  your project folder and execute convert_doc, create_df and create_df_2
+  on the respective files before using this function.
 
 ### Conditions for a match
 
-- A = Does the candidate sentence from the source dataset contain all
+- A = Does the candidate sentence from the Evidence-dataset contain all
   the words of the quote?
 
-- B = Do the first 3 or 1 word(s) of the quote’s location match those of
-  the text in the source dataset?
+- B = Do the first 3 or 1 word(s) of the quote’s reference match those
+  of the respective text file name from the Evidence-dataset?
 
 - C = Is the quote at least five words long?
 
@@ -353,28 +369,30 @@ with a path to a certain folder containing the .mlw-files.
 
 ### Output
 
-- An article dataset with extended citations
+- An Article-dataset with extended citations
 
 ### Assumptions
 
-- The conditions under which the decision tree assumes a match
-  correspond at least approximately to those that require an actual
-  match.
+- The data used in the example below is loaded in your global
+  Environment and you’ve executed executed convert_doc, create_df and
+  create_df_2 on the respective files in the “toy”-folder.
+- The conditions under which the function assumes a match correspond at
+  least approximately to those that require an actual match.
 
 ### Usage
 
     merge_df(lem_dat, bel_dat)
 
-with lem_dat being an article dataset created by create_df and bel_dat
-being an evidence dataset created by create_df_2
+with lem_dat being an Article-dataset created by create_df and bel_dat
+being an Evidence-dataset created by create_df_2
 
 ### Example
 
-    # Extend the Citations of the article dataset
+    # Extend the Citations of the Article-dataset
     final_df <- merge_df(lem_dat = toy_artikel , bel_dat = toy_belege)
-    # View the new article dataset
+    # View the new Article-dataset
     View(final_df)
-    # View the citations with no suitable partner
+    # View the quotes with no suitable partner
     errors <- readr::read_csv("fehler.csv")
     View(errors)
     # View the quotes with several possible partners
