@@ -2,7 +2,9 @@ Package: mlwdw26
 Title: Organizing the data generated in the creation of the Medieval Latin Dictionary (MLW)
 Version: 0.0.0.9000
 Authors@R: 
-    person("ATSzimmat", role = c("aut", "cre"))
+    person("Anton", "Szimmat", 
+           email = "anton.szimmat@campus.lmu.de", 
+           role = c("aut", "cre"))
 Description: Organizing the data generated in the creation of the Medieval Latin Dictionary (MLW)
 License: MIT + file LICENSE
 Encoding: UTF-8
