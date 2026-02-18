@@ -102,10 +102,6 @@ with doc_folder being a path to a certain folder containing .doc-files.
 - The folder containing the .txt-files you want to use should be located
   in your project folder before using this function.
 
-- You should load that folder in your project folder and you should
-  execute convert_doc on the respective files before using this
-  function.
-
 - To ensure that each line of the dataset contains only one sentence,
   the lines of the .txt-files are split according to sentences (ending
   with . ! or ?), lines split in other ways are merged and words split
@@ -357,7 +353,7 @@ with a path to a certain folder containing the .mlw-files.
 - All quotes for which the function found multiple possible partners are
   saved in a CSV file, always named “nicht_eindeutig.csv”.
 
-- The data used in the example below is available on the GitHub
+- The files used in the example below are available on the GitHub
   repository in a folder named “toy”. Before executing the example code
   you should apply convert_doc, create_df and create_df_2 on the
   repective files.
