@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_df_2.R
 \name{create_df_2}
 \alias{create_df_2}
-\title{Create an evidence dataset from the .txt-files that is ready for use with merge_df}
+\title{Create an Evidence-dataset from the .txt-files that is ready for use with merge_df}
 \usage{
 create_df_2(txt_folder)
 }
@@ -13,10 +13,10 @@ create_df_2(txt_folder)
 An evidence dataset containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle" and that is ready for use with merge_df
 }
 \description{
-This function creates a DataFrame from all .txt-files located in the specified folder, containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle". The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package and executed convert_doc on the doc_folder. Please execute the example code manually and don't use the run_examples button.For further informations see https://github.com/ATSzimmat/mlwdw26.
+This function creates a dataset from all .txt-files located in the specified folder, containing the columns "langer_beleg", "pruef_beleg" and "pruef_stelle". The files used in the example below are available on the GitHub repository in a folder named "toy". You should load that folder in your project folder and execute convert_doc on the respective files before using this function. Please execute the example code manually and don't use the run_examples button.For further informations see https://github.com/ATSzimmat/mlwdw26.
 }
 \examples{
-# Create the evidence dataFrame
+# Create the Evidence-dataset
 toy_belege <- create_df_2(txt_folder = "toy/toy_doc_txt")
 # View the result
 View(toy_belege)

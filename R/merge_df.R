@@ -1,17 +1,17 @@
-#' Extend the citations in the article dataset using the passages from the evidence material.
+#' Extend the quotes in the Article-dataset using the passages from the Evidence-dataset.
 #'
-#' This function takes an article dataset created by create_df and an evidence dataset created by create_df_2 and gives back an article dataset with extended citations. All citations from the article dataset for which no suitable partner could be found are stored separately in a CSV-file, including metadata, and the sources of error are explicitly stated.The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package and executed convert_doc, create_df and create_df_2. For further informations see https://github.com/ATSzimmat/mlwdw26. All citations for which the function found no matching partner are saved in a CSV file, always named "fehler.csv". The source of the error that led to the missing partner is explicitly indicated. All citations for which the function found multiple possible partners are saved in a CSV file, always named "nicht_eindeutig.csv".
+#' This function takes an Article-dataset created by create_df and an Evidence-dataset created by create_df_2 and gives back an Article-dataset with extended quotes. The data used in the example below is available on the GitHub repository in a folder named "toy". You should load that folder in your project folder and execute convert_doc, create_df and create_df_2 on the respective files before using this function. For further informations see https://github.com/ATSzimmat/mlwdw26. All citations for which the function found no matching partner are saved in a CSV file, always named "fehler.csv". The source of the error that led to the missing partner is explicitly indicated. All quotes from the Article-dataset for which no suitable partner could be found are stored separately in a CSV-file named "fehler.csv", including metadata, and the conditions that were met or not met are explicitly stated. All quotes for which the function found multiple possible partners are saved in a CSV file, always named "nicht_eindeutig.csv".
 #'
 #' @param lem_dat an article dataset created by create_df
 #' @param bel_dat an evidence dataset created by create_df_2
 #' @returns an article dataset with extended citations
 #' @export
 #' @examples
-#' # Extend the Citations of the article dataset
+#' # Extend the Citations of the Article-dataset
 #' final_df <- merge_df(lem_dat = toy_artikel , bel_dat = toy_belege)
-#' # View the new article dataset
+#' # View the new Article-dataset
 #' View(final_df)
-#' # View the citations with no suitable partner
+#' # View the quotes with no suitable partner
 #' errors <- readr::read_csv("fehler.csv")
 #' View(errors)
 #' # View the quotes with several possible partners

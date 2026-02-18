@@ -1,12 +1,12 @@
-#' Create an article dataset from the .mlw-files that is ready for use with merge_df
+#' Create an Article-dataset from the .mlw-files that is ready for use with merge_df
 #'
-#' This function creates a DataFrame from all .mlw-files located in the specified folder, containing the columns "lemma", "u*_bedeutung", "zitat" and "stelle". The files used in the example were automatically loaded with the package and should be located in your project folder as a folder named "toy", after you installed the package. Please execute the example code manually and don't use the run_examples button. For further informations see https://github.com/ATSzimmat/mlwdw26.
+#' This function creates a dataset from all .mlw-files located in the specified folder, containing the columns "lemma", "u*_bedeutung", "zitat" and "stelle".The files used in the example below are available on the GitHub repository in a folder named "toy". You should load that folder in your project folder before using this function. Please execute the example code manually and don't use the run_examples button. For further informations see https://github.com/ATSzimmat/mlwdw26.
 #'
 #' @param mlw_folder Path to a certain folder containing .mlw-files.
 #' @returns An article dataset containing the columns "lemma", "u*_bedeutung", "zitat" and "stelle" and that is ready for use with merge_df
 #' @export
 #' @examples
-#' # Create the article dataFrame
+#' # Create the Article-dataset
 #' toy_artikel <- create_df(mlw_folder = "toy/toy_mlw")
 #' # View the result
 #' View(toy_artikel)
